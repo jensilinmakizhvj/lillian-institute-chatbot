@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Dashboard | Lillian Institute of Technology</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:#20334b;font-family:'DM Sans',sans-serif}.layout{display:flex;min-height:100vh}.sidebar{width:245px;background:#122d4d;color:#dce6f1;padding:25px 17px;flex-shrink:0}.brand{display:flex;align-items:center;gap:10px;padding:0 8px 30px;color:white;text-decoration:none}.mark{width:40px;height:40px;border-radius:10px;background:#ffffff16;color:#e6c17a;display:grid;place-items:center}.brand b{display:block;font:800 16px Manrope;letter-spacing:1.5px}.brand small{display:block;font-size:8px;letter-spacing:1.2px;margin-top:3px}.nav-label{font-size:9px;letter-spacing:1.6px;color:#8299b2;padding:14px 10px 9px}.nav a{display:flex;align-items:center;gap:12px;color:#c4d0df;text-decoration:none;padding:12px 11px;border-radius:7px;font-size:12px;margin:3px 0}.nav a.active,.nav a:hover{background:#ffffff16;color:#fff}.nav a i{width:17px;color:#e2bd75}.sidebar-bottom{margin-top:45px;padding:13px 10px;border-top:1px solid #ffffff20;font-size:10px;color:#9eb0c4;line-height:1.7}.main{flex:1;min-width:0}.topbar{height:72px;background:#fff;border-bottom:1px solid #e8edf3;display:flex;align-items:center;justify-content:space-between;padding:0 34px}.topbar small{font-size:11px;color:#8190a2}.user-chip{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700}.avatar{width:35px;height:35px;border-radius:50%;background:#e9eff6;color:#244c75;display:grid;place-items:center}.content{padding:32px 34px;max-width:1300px;margin:auto}.eyebrow{font-size:10px;letter-spacing:1.8px;color:#b08a4b;font-weight:700}.heading-row{display:flex;justify-content:space-between;align-items:center;gap:20px}.heading-row h1{font:800 27px Manrope;color:#17385e;margin:8px 0}.date{font-size:10px;color:#718197;background:#fff;padding:10px 13px;border:1px solid #e6ebf1;border-radius:7px}.sub{font-size:12px;color:#7c8a9a;margin:0 0 25px}.notice{background:#fff8e9;border:1px solid #f0dfbd;color:#755b31;border-radius:8px;padding:12px 15px;font-size:10px;line-height:1.6;margin-bottom:22px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.stat{background:#fff;border:1px solid #e9eef4;border-radius:9px;padding:18px}.stat-top{display:flex;justify-content:space-between;align-items:center;color:#8291a2;font-size:10px}.stat-icon{width:34px;height:34px;border-radius:9px;background:#eef3f8;color:#315c86;display:grid;place-items:center}.stat strong{display:block;font:800 25px Manrope;color:#17385e;margin:15px 0 3px}.stat small{font-size:9px;color:#8291a2}.section-title{font:700 15px Manrope;color:#17385e;margin:28px 0 13px}.lower{display:grid;grid-template-columns:1.3fr .7fr;gap:16px}.panel{background:#fff;border:1px solid #e9eef4;border-radius:9px;padding:19px}.panel h3{font:700 13px Manrope;color:#17385e;margin:0 0 15px}.row-item{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #edf1f5;font-size:10px}.row-item:last-child{border:0}.row-item span{color:#718197}.pill{background:#e9f5ee;color:#32815b;border-radius:20px;padding:5px 9px;font-size:9px}.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.quick a{background:#f5f8fb;border:1px solid #e9eef4;border-radius:7px;padding:13px;text-decoration:none;color:#315779;font-size:10px}.quick a i{display:block;font-size:17px;margin-bottom:9px;color:#b28c4e}.logout{display:inline-flex;margin-top:25px;color:#9a5a50;text-decoration:none;font-size:11px;font-weight:700}.logout i{margin-right:7px}@media(max-width:900px){.sidebar{width:205px}.cards{grid-template-columns:repeat(2,1fr)}.lower{grid-template-columns:1fr}}@media(max-width:620px){.layout{display:block}.sidebar{width:auto;padding:13px}.brand{padding:0 6px 12px}.nav{display:flex;overflow:auto;gap:4px}.nav-label,.sidebar-bottom{display:none}.nav a{white-space:nowrap;padding:10px}.topbar{height:58px;padding:0 15px}.content{padding:22px 15px}.heading-row{display:block}.date{display:inline-block;margin-bottom:15px}.cards{gap:9px}.stat{padding:13px}.stat strong{font-size:21px}.quick{grid-template-columns:repeat(2,1fr)}}
+
+.classes-panel{margin-top:22px;background:#fff;border:1px solid #e9eef4;border-radius:10px;padding:20px}
+.classes-panel h2{font:700 17px Manrope;color:#17385e;margin:0 0 6px}
+.classes-panel .classes-note{font-size:11px;color:#7c8a9a;margin:0 0 16px}
+.class-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.class-card{border:1px solid #e9eef4;border-radius:9px;padding:16px;background:#fbfcfe}
+.class-card h3{font:700 14px Manrope;color:#17385e;margin:0 0 12px}
+.class-meta{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.class-meta div{font-size:10px;color:#8291a2;line-height:1.5}
+.class-meta b{display:block;color:#315779;font-size:11px}
+.classes-empty{font-size:12px;color:#718197;padding:14px 0}
+@media(max-width:620px){.class-grid{grid-template-columns:1fr}.class-meta{grid-template-columns:1fr 1fr}}
+
+
+.module-view{background:#fff;border:1px solid #e5ebf2;border-radius:10px;padding:22px;margin-top:20px}
+.module-view h2{font:700 20px Manrope;color:#17385e;margin:0 0 16px}
+.module-view p,.module-view label{font-size:12px;color:#718197}
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.module-card{border:1px solid #e8edf3;border-radius:8px;padding:16px;background:#fbfcfe}
+.module-card b{display:block;color:#17385e;margin:8px 0}
+.module-form{display:grid;gap:12px;max-width:560px}
+.module-form input,.module-form select,.module-form textarea{width:100%;padding:11px;border:1px solid #dce4ed;border-radius:6px;font:12px 'DM Sans'}
+.module-form button{background:#17385e;color:white;border:0;border-radius:6px;padding:11px 16px;cursor:pointer;width:max-content}
+.module-message{padding:12px;background:#edf9f0;border-radius:7px;color:#246338;font-size:12px}
+.classes-panel{margin-top:18px}.classes-panel h2{font:700 20px Manrope;color:#17385e}.classes-empty{font-size:12px;color:#718197}\n.module-view{margin-top:22px;min-height:180px}.module-view h2{font:700 20px Manrope;color:#17385e;margin:0 0 16px}.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}.module-card{background:#f5f8fb;border:1px solid #e6edf4;border-radius:8px;padding:16px}.module-card small{display:block;color:#718197;font-size:10px;margin-bottom:8px}.module-card b{color:#17385e;font-size:14px}.module-form{display:grid;gap:13px;max-width:620px}.module-form label{display:grid;gap:6px;font-size:11px;color:#52677e}.module-form input,.module-form select,.module-form textarea{width:100%;padding:10px;border:1px solid #dce4ed;border-radius:6px;font:inherit}.module-form button{width:max-content;background:#17385e;color:white;border:0;border-radius:6px;padding:10px 20px;cursor:pointer}@media(max-width:620px){.module-grid{grid-template-columns:1fr}}
+.module-form{display:grid;grid-template-columns:repeat(2,minmax(220px,1fr));gap:14px;max-width:850px;margin-top:18px}
+.module-form label{display:flex;flex-direction:column;gap:6px;color:#718197;font-size:12px}
+.module-form input,.module-form select,.module-form textarea{width:100%;padding:11px;border:1px solid #dce4ee;border-radius:7px;font:inherit;color:#20334b;background:#fff}
+.module-form button{background:#17385e;color:#fff;border:0;border-radius:7px;padding:11px 18px;cursor:pointer;justify-self:start}
+.form-result{grid-column:1/-1;font-size:12px;margin:0}
+.module-history{margin-top:24px;overflow:auto}.module-history h3{font:700 14px Manrope;color:#17385e}
+.module-history table{width:100%;border-collapse:collapse;font-size:11px;background:#fff}
+.module-history th,.module-history td{padding:10px;border-bottom:1px solid #e8edf3;text-align:left}
+.module-history th{background:#f4f7fb;color:#315779}
+@media(max-width:650px){.module-form{grid-template-columns:1fr}}
+</style><style>
+/* Lillian Institute light lavender + white theme */
+:root{--lavender:#e9e2ff;--lavender-strong:#d8ccff;--lavender-soft:#f6f3ff;--ink:#393052;--muted:#756d8d;--line:#e7e0f5;--accent:#8b78c7;--accent-dark:#6f5aa8;--white:#fff}
+body{background:#faf9ff!important;color:var(--ink)!important}
+.site-header,.login-shell,.card,.panel,.content-card,.module-card,.stat-card,.table-wrap,.chat-panel{background:#fff!important}
+.topbar,footer{background:#eee9fb!important;color:#51486d!important}
+.brand,.text-link,.site-header nav>a:hover,.site-header nav>a.active{color:var(--accent-dark)!important}
+.brand-mark,.nav-login,.btn-gold,.chat-launcher{background:var(--lavender-strong)!important;color:#40365e!important}
+.nav-login i,.eyebrow,.section-tag,.program-card>small{color:var(--accent-dark)!important}
+.quick-stats,.programs-section,.departments-section,.faculty-section{background:var(--lavender-soft)!important}
+.program-card,.department-card,.faculty-card{background:#fff!important;border-color:var(--line)!important}
+.program-card.featured,.portal-section,.placement-band{background:linear-gradient(135deg,#e9e2ff,#dcd2fa)!important;color:var(--ink)!important;border-color:var(--lavender-strong)!important}
+.program-card.featured p,.portal-inner>div:first-child>p,.portal-card small,.placement-inner>p{color:#625a79!important}
+.portal-card{background:#ffffffb8!important;border-color:#d8ccf0!important;color:var(--ink)!important}
+.portal-card b,.portal-inner h2,.placement-inner h2{color:var(--ink)!important}
+footer .footer-grid h4,footer .footer-brand{color:var(--ink)!important}
+footer .footer-grid p,footer .footer-grid a,footer .footer-grid span,.copyright{color:#6e6684!important}
+.hero-shade{background:linear-gradient(90deg,rgba(48,39,78,.78),rgba(75,62,112,.52),rgba(75,62,112,.12))!important}
+.chat-head{background:var(--accent-dark)!important}
+.chat-input button,#lit-agent-launch{background:var(--accent)!important;color:#fff!important}
+.chat-panel,.chat-body,#lit-agent-panel{border-color:var(--line)!important}
+.sidebar{background:#eee9fb!important;color:#51486d!important;border-right:1px solid var(--line)!important}
+.sidebar .brand,.sidebar .brand b,.sidebar a,.sidebar button{color:#51486d!important}
+.sidebar .active,.sidebar a.active,.sidebar button.active{background:#ded5f7!important;color:#493d70!important}
+.main,.main-content,.content,.page-content{background:#faf9ff!important}
+.header,.topbar,.top-header{background:#fff!important;color:var(--ink)!important;border-bottom:1px solid var(--line)!important}
+.card,.panel,.stat-card,.metric-card,.section-card,.table-container{border-color:var(--line)!important;box-shadow:0 5px 20px rgba(100,82,145,.07)!important}
+button,.primary-btn,.btn-primary{background:var(--accent)!important;color:#fff!important;border-color:var(--accent)!important}
+input,select,textarea{border-color:#ded6ef!important;background:#fff!important;color:var(--ink)!important}
+.badge,.tag,.pill{background:#eee9fb!important;color:#62528e!important}
+@media(max-width:700px){.site-header nav{background:#fff!important}}
+</style>
+</head>
+<body><div class="layout">
+<aside class="sidebar"><a class="brand" href="index.html"><span class="mark"><i class="fa-solid fa-building-columns"></i></span><span><b>LILLIAN</b><small>INSTITUTE OF TECHNOLOGY</small></span></a>
+<div class="nav-label">MAIN MENU</div><nav class="nav" id="nav"></nav><div class="sidebar-bottom">Lillian Institute of Technology<br>Student & Campus Services</div></aside>
+<main class="main"><header class="topbar"><small id="topRole">Portal Dashboard</small><div class="user-chip"><span id="userName">Welcome User</span><span class="avatar" id="avatar"><i class="fa-solid fa-user"></i></span><button id="logoutButton" type="button" style="border:0;border-radius:7px;padding:9px 13px;background:#8b78c7;color:#fff;font-weight:700;cursor:pointer"><i class="fa-solid fa-right-from-bracket"></i> Logout</button></div></header>
+<section class="content"><div class="eyebrow" id="eyebrow">LILLIAN DIGITAL CAMPUS</div><div class="heading-row"><h1 id="welcome">Welcome to your dashboard</h1><span class="date" id="today"></span></div><p class="sub" id="sub">Your college information at a glance.</p>
+<div class="notice"><i class="fa-solid fa-circle-info"></i> Loading your account information...</div>
+<div class="cards" id="stats"></div><div id="classesPanel" class="classes-panel" hidden></div><div id="moduleView" class="panel module-view" hidden></div><h2 class="section-title" id="sectionTitle">Your Overview</h2>
+<div class="lower"><div class="panel"><h3 id="listTitle">Recent Updates</h3><div id="updates"></div></div><div class="panel"><h3>Quick Access</h3><div class="quick" id="quick"></div></div></div>
+<a class="logout" href="index.html"><i class="fa-solid fa-arrow-right-from-bracket"></i> Back to College Website</a>
+</section></main></div>
+<script>
+const role = (new URLSearchParams(location.search).get('role') || 'student').toLowerCase();
+const config = {
+  student: {
+    label: 'Student Portal', name: 'Student', icon: 'fa-user-graduate',
+    welcome: 'Welcome, Student!',
+    sub: 'Here is your academic snapshot for this semester.',
+    menu: [['Overview','fa-chart-pie'],['My Profile','fa-user'],['Attendance','fa-calendar-check'],['Marks & Results','fa-square-poll-vertical'],['Timetable','fa-calendar-days'],['Fees','fa-receipt']],
+    quick: [['My Profile','fa-user'],['View Attendance','fa-calendar-check'],['Exam Timetable','fa-calendar-days']]
+  },
+  employee: {
+    label: 'Faculty & Employee Portal', name: 'Faculty / Employee', icon: 'fa-chalkboard-user',
+    welcome: 'Welcome, Faculty Member!',
+    sub: 'View your faculty profile, department and academic responsibilities.',
+    menu: [['Overview','fa-chart-pie'],['My Faculty Profile','fa-user'],['Department','fa-building'],['My Classes','fa-chalkboard'],['Attendance Entry','fa-calendar-check'],['Marks Entry','fa-pen-to-square'],['Leave Requests','fa-envelope']],
+    quick: [['My Faculty Profile','fa-user'],['My Department','fa-building'],['Mark Attendance','fa-calendar-check'],['Enter Marks','fa-pen-to-square']]
+  },
+  parent: {
+    label: 'Parent Portal', name: 'Parent', icon: 'fa-people-roof',
+    welcome: 'Welcome, Parent!',
+    sub: 'Stay connected with your child’s academic progress.',
+    menu: [['Overview','fa-chart-pie'],['Child Profile','fa-user-graduate'],['Attendance','fa-calendar-check'],['Academic Results','fa-square-poll-vertical'],['Fee Details','fa-wallet'],['Announcements','fa-bullhorn']],
+    quick: [['Child Profile','fa-user-graduate'],['Attendance Report','fa-calendar-check'],['Fee Details','fa-wallet']]
+  },
+  admin: {
+    label: 'Administrator Portal', name: 'Administrator', icon: 'fa-user-shield',
+    welcome: 'Welcome, Administrator!',
+    sub: 'Manage and review confidential college records.',
+    menu: [['Overview','fa-chart-pie'],['Student Details','fa-user-graduate'],['Employee Details','fa-users'],['Student Attendance','fa-calendar-check'],['Student Marks','fa-square-poll-vertical'],['Employee Attendance','fa-clipboard-check'],['Employee Marks','fa-pen-to-square'],['Fees Details','fa-wallet']],
+    quick: [['Student Details','fa-user-graduate'],['Employee Details','fa-users'],['Student Attendance','fa-calendar-check'],['Fees Details','fa-wallet']]
+  }
+};
+
+const c = config[role] || config.student;
+document.title = c.label + ' | Lillian Institute of Technology';
+document.getElementById('topRole').textContent = c.label;
+document.getElementById('userName').textContent = 'Welcome ' + c.name;
+document.getElementById('avatar').innerHTML = '<i class="fa-solid ' + c.icon + '"></i>';
+document.getElementById('welcome').textContent = c.welcome;
+document.getElementById('sub').textContent = c.sub;
+document.getElementById('today').textContent =
+  new Date().toLocaleDateString('en-IN', {day:'2-digit', month:'short', year:'numeric'});
+
+// Clear the authenticated server session before returning to the public website.
+document.getElementById('logoutButton')?.addEventListener('click', async () => {
+  const button = document.getElementById('logoutButton');
+  button.disabled = true;
+  button.textContent = 'Logging out...';
+  try {
+    const response = await fetch('/api/logout', {
+      method: 'POST',
+      credentials: 'same-origin'
+    });
+    const data = await response.json();
+    if (!response.ok || data.status !== 'success') {
+      throw new Error(data.message || 'Logout failed. Please try again.');
+    }
+    window.location.href = '/';
+  } catch (error) {
+    button.disabled = false;
+    button.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i> Logout';
+    alert(error.message || 'Could not log out. Please check that the server is running.');
+  }
+});
+
+document.getElementById('nav').innerHTML = c.menu.map((x, i) =>
+  '<a href="#" class="' + (i === 0 ? 'active' : '') + '" onclick="event.preventDefault();setActiveNav(this);if(role===\'employee\' && this.textContent.trim()===\'My Classes\'){loadMyClasses();}else{document.getElementById(\'classesPanel\').hidden=true;}"><i class="fa-solid ' + x[1] + '"></i>' + x[0] + '</a>'
+).join('');
+
+document.getElementById('quick').innerHTML = c.quick.map(x =>
+  '<a href="#" onclick="event.preventDefault();if(role===\'employee\' && x[0]===\'My Classes\'){loadMyClasses();}"><i class="fa-solid ' + x[1] + '"></i>' + x[0] + '</a>'
+).join('');
+
+document.getElementById('listTitle').textContent =
+  role === 'employee' ? 'Work Updates' : role === 'parent' ? 'Child & College Updates' : 'Academic Updates';
+
+function renderStats(stats) {
+  document.getElementById('stats').innerHTML = stats.map(x =>
+    '<div class="stat"><div class="stat-top"><span>' + x[0] +
+    '</span><span class="stat-icon"><i class="fa-solid ' + x[3] +
+    '"></i></span></div><strong>' + x[1] +
+    '</strong><small>' + x[2] + '</small></div>'
+  ).join('');
+}
+
+function renderUpdates(items) {
+  document.getElementById('updates').innerHTML = items.length
+    ? items.map(x => '<div class="row-item"><div><b>' + x[0] +
+      '</b><br><span>' + x[1] + '</span></div>' +
+      (x[2] ? '<span class="pill">' + x[2] + '</span>' : '') + '</div>').join('')
+    : '<p style="font-size:11px;color:#718197">No academic records are available yet.</p>';
+}
+
+async function loadStudentDashboard() {
+  const notice = document.querySelector('.notice');
+  try {
+    const response = await fetch('/api/student-dashboard');
+    const data = await response.json();
+
+    if (!response.ok || data.status !== 'success') {
+      notice.textContent = data.message || 'Please sign in again to view your dashboard.';
+      return;
+    }
+
+    document.getElementById('userName').textContent = 'Welcome ' + data.student.name;
+    document.getElementById('welcome').textContent = 'Welcome, ' + data.student.name + '!';
+    renderStats([
+      ['Attendance', data.attendance.percentage, data.attendance.note, 'fa-calendar-check'],
+      ['Marks Average', data.marks.average, data.marks.note, 'fa-chart-line'],
+      ['Subjects Recorded', data.marks.subject_count, 'Subjects with marks', 'fa-book'],
+      ['Fee Balance', data.fees.balance, data.fees.note, 'fa-wallet']
+    ]);
+
+    renderUpdates([
+      ['Attendance record', data.attendance.note, ''],
+      ['Marks & results', data.marks.note, ''],
+      ['Fee information', data.fees.note, '']
+    ]);
+
+    notice.textContent = 'Student information loaded successfully.';
+    notice.style.background = '#edf9f0';
+    notice.style.borderColor = '#c8e8d0';
+    notice.style.color = '#246338';
+  } catch (error) {
+    notice.textContent = 'Could not load student data. Check that the Flask server is running.';
+  }
+}
+
+async function loadEmployeeDashboard() {
+  const notice = document.querySelector('.notice');
+  try {
+    const response = await fetch('/api/employee-dashboard');
+    const data = await response.json();
+
+    if (!response.ok || data.status !== 'success' || !data.employee) {
+      notice.textContent = data.message || 'Could not load employee details. Please sign in again.';
+      return;
+    }
+
+    const employee = data.employee;
+    const employeeName = employee.name || 'Employee';
+    const designation = employee.designation || 'Not provided';
+    const department = employee.department || 'Not provided';
+
+    document.getElementById('userName').textContent = 'Welcome ' + employeeName;
+    document.getElementById('welcome').textContent = 'Welcome, ' + employeeName + '!';
+    document.getElementById('sub').textContent =
+      'Here is your faculty / employee profile and department information.';
+
+    renderStats([
+      ['Designation', designation, 'Employee role', 'fa-id-badge'],
+      ['Department', department, 'Assigned department', 'fa-building'],
+      ['Account Status', 'Active', 'Verified', 'fa-circle-check'],
+      ['Portal', 'Connected', 'Employee portal is ready', 'fa-desktop']
+    ]);
+
+    renderUpdates([
+      ['Employee Name', employeeName, ''],
+      ['Email Address', employee.email || 'Not provided', ''],
+      ['Department', department, ''],
+      ['Designation', designation, '']
+    ]);
+
+    notice.textContent = '';
+    notice.hidden = true;
+    notice.style.background = '#edf9f0';
+    notice.style.borderColor = '#c8e8d0';
+    notice.style.color = '#246338';
+  } catch (error) {
+    notice.textContent = 'Could not load employee information. Please check that the server is running.';
+  }
+}
+
+
+function setActiveNav(selected) {
+  document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+  selected.classList.add('active');
+}
+
+function escapeHTML(value) {
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  })[ch]);
+}
+
+async function loadMyClasses() {
+  const panel = document.getElementById('classesPanel');
+  const notice = document.querySelector('.notice');
+  panel.hidden = false;
+  panel.innerHTML = '<p class="classes-empty">Loading your classes...</p>'; 
+  panel.scrollIntoView({behavior:'smooth', block:'start'});
+
+  try {
+    const response = await fetch('/api/employee-classes');
+    const data = await response.json();
+
+    if (!response.ok || data.status !== 'success') {
+      panel.innerHTML = '<p class="classes-empty">' + escapeHTML(data.message || 'Could not load classes.') + '</p>';
+      return;
+    }
+
+    if (!data.classes || data.classes.length === 0) {
+      panel.innerHTML = '<h2>My Classes</h2><p class="classes-empty">No classes have been assigned to this account yet.</p>';
+      return;
+    }
+
+    panel.innerHTML = '<h2>My Classes</h2>' +
+      '<p class="classes-note">Department: ' + escapeHTML(data.department) +
+      ' · Sample timetable allocations for demonstration</p>' +
+      '<div class="class-grid">' + data.classes.map(item =>
+        '<article class="class-card"><h3>' + escapeHTML(item.subject) + '</h3>' +
+        '<div class="class-meta">' +
+        '<div>Class<b>' + escapeHTML(item.class_name) + '</b></div>' +
+        '<div>Section<b>' + escapeHTML(item.section) + '</b></div>' +
+        '<div>Classroom<b>' + escapeHTML(item.room) + '</b></div>' +
+        '<div>Schedule<b>' + escapeHTML(item.schedule) + '</b></div>' +
+        '</div></article>'
+      ).join('') + '</div>';
+
+    notice.textContent = '';
+    notice.hidden = true;
+    notice.style.background = '#edf9f0';
+    notice.style.borderColor = '#c8e8d0';
+    notice.style.color = '#246338';
+  } catch (error) {
+    panel.innerHTML = '<p class="classes-empty">Could not connect to the classes API. Please check that Flask is running.</p>';
+  }
+}
+
+
+
+// Faculty portal navigation: every menu and quick-access tile opens its own view.
+const overviewEls = ['eyebrow','welcome','today','sub','stats','sectionTitle','updates','listTitle','quick'];
+function showOverviewView() {
+  overviewEls.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.closest('#stats') ? el.closest('#stats').hidden=false : el.hidden=false;
+  });
+  document.querySelector('.notice').hidden = true;
+  document.querySelector('.lower').hidden = false;
+  document.getElementById('classesPanel').hidden = true;
+  document.getElementById('moduleView').hidden = true;
+}
+function showModuleView(title, body) {
+  overviewEls.forEach(id => {
+    const el=document.getElementById(id);
+    if(el) el.hidden=true;
+  });
+  document.querySelector('.notice').hidden=true;
+  document.querySelector('.lower').hidden=true;
+  document.getElementById('classesPanel').hidden=true;
+  const view=document.getElementById('moduleView');
+  view.hidden=false;
+  view.innerHTML='<h2>'+escapeHTML(title)+'</h2>'+body;
+  view.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function moduleForm(formId, fields, buttonText='Save') {
+  return '<form class="module-form" id="'+formId+'">'+fields+
+    '<button type="submit">'+buttonText+'</button><p class="form-result" id="formResult" role="status"></p></form>';
+}
+async function submitModuleForm(formId, endpoint) {
+  const form = document.getElementById(formId);
+  const result = document.getElementById('formResult');
+  const payload = Object.fromEntries(new FormData(form).entries());
+  result.textContent = 'Saving...';
+  result.style.color = '#315c86';
+  try {
+    const response = await fetch(endpoint, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    const data = await response.json();
+    if (!response.ok || data.status !== 'success') throw new Error(data.message || 'Could not save record.');
+    result.textContent = 'Saved successfully.';
+    result.style.color = '#247344';
+    form.reset();
+    const historyType = formId==='attendanceForm' ? 'attendance' : formId==='marksForm' ? 'marks' : 'leaves';
+    await loadEmployeeRecords(historyType);
+  } catch (error) {
+    result.textContent = error.message;
+    result.style.color = '#b42318';
+  }
+}
+async function openEmployeeModule(label) {
+  if(label==='Overview'){showOverviewView();return;}
+  if(label==='My Classes'){showModuleView(label,'<p>Loading assigned classes...</p>');const panel=document.getElementById('classesPanel');panel.hidden=false;await loadMyClasses();document.getElementById('moduleView').hidden=true;return;}
+  if(label==='My Faculty Profile'){
+    showModuleView(label,'<p>Loading faculty profile...</p>');
+    try{const r=await fetch('/api/employee-dashboard');const d=await r.json();if(!r.ok||!d.employee)throw Error(d.message||'Profile unavailable');const e=d.employee;
+      document.getElementById('moduleView').innerHTML='<h2>'+escapeHTML(label)+'</h2><div class="module-grid">'+[['Name',e.name],['Email',e.email],['Designation',e.designation],['Department',e.department]].map(x=>'<div class="module-card"><small>'+x[0]+'</small><b>'+escapeHTML(x[1]||'Not provided')+'</b></div>').join('')+'</div>';
+    }catch(err){document.getElementById('moduleView').innerHTML='<h2>'+label+'</h2><p>'+escapeHTML(err.message)+'</p>';}return;
+  }
+  if(label==='Department'||label==='My Department'){
+    showModuleView('Department','<p>Loading department information...</p>');
+    try{const r=await fetch('/api/employee-dashboard');const d=await r.json();const e=d.employee||{};document.getElementById('moduleView').innerHTML='<h2>Department</h2><div class="module-grid"><div class="module-card"><small>Department</small><b>'+escapeHTML(e.department||'Not provided')+'</b></div><div class="module-card"><small>Faculty member</small><b>'+escapeHTML(e.name||'')+'</b></div><div class="module-card"><small>Designation</small><b>'+escapeHTML(e.designation||'')+'</b></div></div>';}catch(err){document.getElementById('moduleView').innerHTML='<p>Could not load department.</p>';}return;
+  }
+  if(label==='Attendance Entry'||label==='Mark Attendance'){
+    showModuleView('Attendance Entry',
+      '<p>Record faculty attendance for a class.</p>'+
+      moduleForm('attendanceForm',
+        '<label>Class / Section<input name="class_section" required placeholder="e.g. IT - Year 1 A"></label>'+
+        '<label>Student Register Number<input name="register_number" required placeholder="Enter student register number"></label>'+
+        '<label>Date<input name="attendance_date" type="date" required></label>'+
+        '<label>Subject<input name="subject" required placeholder="Subject name"></label>'+
+        '<label>Attendance Status<select name="attendance_status" required><option value="Present">Present</option><option value="Absent">Absent</option></select></label>')+
+      '<div id="attendanceHistory" class="module-history"></div>');
+    document.getElementById('attendanceForm').addEventListener('submit',e=>{e.preventDefault();submitModuleForm('attendanceForm','/api/employee-attendance');});
+    loadEmployeeRecords('attendance');
+    return;
+  }
+  if(label==='Marks Entry'||label==='Enter Marks'){
+    showModuleView('Marks Entry',
+      '<p>Enter student assessment marks.</p>'+
+      moduleForm('marksForm',
+        '<label>Class / Section<input name="class_section" required placeholder="e.g. IT - Year 1 A"></label>'+
+        '<label>Subject<input name="subject" required placeholder="Subject name"></label>'+
+        '<label>Assessment<input name="assessment" required placeholder="Internal Test 1"></label>'+
+        '<label>Student Register Number<input name="register_number" required placeholder="Register number"></label>'+
+        '<label>Marks Obtained<input name="marks" type="number" min="0" step="0.01" required></label>'+
+        '<label>Maximum Marks<input name="max_marks" type="number" min="1" step="0.01" value="100" required></label>')+
+      '<div id="marksHistory" class="module-history"></div>');
+    document.getElementById('marksForm').addEventListener('submit',e=>{e.preventDefault();submitModuleForm('marksForm','/api/employee-marks');});
+    loadEmployeeRecords('marks');
+    return;
+  }
+  if(label==='Leave Requests'){
+    showModuleView(label,
+      '<p>Submit a leave request. It will be marked as Pending.</p>'+ 
+      moduleForm('leaveForm',
+        '<label>From Date<input name="from_date" type="date" required></label>'+
+        '<label>To Date<input name="to_date" type="date" required></label>'+
+        '<label>Reason<textarea name="reason" required rows="3" placeholder="Enter reason"></textarea></label>')+
+      '<div id="leaveHistory" class="module-history"></div>');
+    document.getElementById('leaveForm').addEventListener('submit',e=>{e.preventDefault();submitModuleForm('leaveForm','/api/employee-leave');});
+    loadEmployeeRecords('leaves');
+    return;
+  }
+  showModuleView(label,'<p>This section is ready for the next development step.</p>');
+}
+
+async function loadEmployeeRecords(type) {
+  const targetId = type==='attendance' ? 'attendanceHistory' : type==='marks' ? 'marksHistory' : 'leaveHistory';
+  const target = document.getElementById(targetId);
+  if (!target) return;
+  target.innerHTML = '<h3>Saved records</h3><p>Loading records...</p>'; 
+  try {
+    const response = await fetch('/api/employee-records');
+    const data = await response.json();
+    if (!response.ok || data.status!=='success') throw new Error(data.message || 'Could not load records.');
+    let rows = data[type] || [];
+    if (!rows.length) { target.innerHTML='<h3>Saved records</h3><p>No records saved yet.</p>'; return; }
+    let headers, values;
+    if(type==='attendance'){
+      headers=['Date','Class / Section','Subject','Status'];
+      values=rows.map(x=>[x.attendance_date,x.class_section,x.subject,x.attendance_status]);
+    } else if(type==='marks'){
+      headers=['Class / Section','Subject','Assessment','Register No.','Marks'];
+      values=rows.map(x=>[x.class_section,x.subject,x.assessment,x.register_number,`${x.marks} / ${x.max_marks}`]);
+    } else {
+      headers=['From','To','Reason','Status'];
+      values=rows.map(x=>[x.from_date,x.to_date,x.reason,x.status]);
+    }
+    target.innerHTML='<h3>Saved records</h3><div class="table-wrap"><table><thead><tr>'+
+      headers.map(h=>'<th>'+escapeHTML(h)+'</th>').join('')+'</tr></thead><tbody>'+
+      values.map(row=>'<tr>'+row.map(v=>'<td>'+escapeHTML(v)+'</td>').join('')+'</tr>').join('')+
+      '</tbody></table></div>';
+  } catch(error) {
+    target.innerHTML='<h3>Saved records</h3><p>'+escapeHTML(error.message)+'</p>';
+  }
+}
+
+
+// Admin Portal: all private records are retrieved through the admin-protected API.
+const adminTopics = {
+  'Student Details': ['students_list','students',['ID','Name','Email','Department','Year'],r=>[r.id,r.name,r.email,r.department,r.year]],
+  'Employee Details': ['employees_list','employees',['ID','Name','Email','Designation','Department'],r=>[r.id,r.name,r.email,r.designation,r.department]],
+  'Student Attendance': ['student_attendance','student_attendance',['Student','Department','Year','Date','Status'],r=>[r.name,r.department,r.year,r.date,r.status]],
+  'Student Marks': ['student_marks','student_marks',['Student','Department','Year','Subject','Marks'],r=>[r.name,r.department,r.year,r.subject,r.marks]],
+  'Employee Attendance': ['employee_attendance','employee_attendance',['Employee','Department','Class / Section','Date','Subject','Status'],r=>[r.name,r.department,r.class_section,r.attendance_date,r.subject,r.attendance_status]],
+  'Employee Marks': ['employee_marks','employee_marks',['Employee','Department','Class / Section','Subject','Assessment','Register No.','Marks','Maximum'],r=>[r.name,r.department,r.class_section,r.subject,r.assessment,r.register_number,r.marks,r.max_marks]],
+  'Fees Details': ['student_fees','student_fees',['Student','Department','Year','Total Fee','Paid Fee','Balance'],r=>[r.name,r.department,r.year,money(r.total_fee),money(r.paid_fee),money(r.balance)]]
+};
+async function loadAdminTopic(label) {
+  const view=document.getElementById('moduleView');
+  showModuleView(label,'<p>Loading confidential records...</p>');
+  const spec=adminTopics[label]; if(!spec)return;
+  try {
+    const response=await fetch('/api/admin-data?topic='+encodeURIComponent(spec[0]),{credentials:'same-origin'});
+    const data=await response.json();
+    if(!response.ok||data.status!=='success')throw new Error(data.message||'Unable to load records.');
+    const rows=data[spec[1]]||[];
+    view.innerHTML='<h2>'+escapeHTML(label)+'</h2><p>Admin-only confidential records. Display limit: '+(data.shown_max||60)+'</p>'+moduleTable(spec[2],rows.map(spec[3]),'No records are available in this category yet.');
+  } catch(err) { view.innerHTML='<h2>'+escapeHTML(label)+'</h2><p class="module-message">'+escapeHTML(err.message)+'</p>'; }
+}
+async function loadAdminOverview(){
+  const notice=document.querySelector('.notice');
+  try {
+    const [sr,er]=await Promise.all([
+      fetch('/api/admin-data?topic=students_list',{credentials:'same-origin'}),
+      fetch('/api/admin-data?topic=employees_list',{credentials:'same-origin'})
+    ]);
+    const sd=await sr.json(),ed=await er.json();
+    if(!sr.ok||!er.ok)throw new Error(sd.message||ed.message||'Administrator sign-in required.');
+    const sc=(sd.students||[]).length,ec=(ed.employees||[]).length;
+    renderStats([['Students',sc,'Student records','fa-user-graduate'],['Employees',ec,'Employee records','fa-users'],['Access','Admin only','Protected records','fa-user-shield'],['Portal','Active','Administrator access','fa-shield-halved']]);
+    renderUpdates([['Student records',String(sc)+' records available',''],['Employee records',String(ec)+' records available',''],['Privacy','Visible only in Admin Portal','Protected']]);
+    notice.textContent='Administrator access verified. Choose a category to view confidential records.';
+  } catch(err) { notice.textContent=err.message+' Please sign in through the Administrator login.'; }
+}
+if(role==='admin'){
+  document.getElementById('nav').addEventListener('click',e=>{
+    const link=e.target.closest('a');if(!link)return;
+    e.preventDefault();e.stopImmediatePropagation();
+    document.querySelectorAll('.nav a').forEach(x=>x.classList.remove('active'));link.classList.add('active');
+    const label=link.textContent.trim();
+    if(label==='Overview'){showOverviewView();loadAdminOverview();}else loadAdminTopic(label);
+  },true);
+  document.getElementById('quick').addEventListener('click',e=>{
+    const link=e.target.closest('a');if(!link)return;e.preventDefault();loadAdminTopic(link.textContent.trim());
+  },true);
+  loadAdminOverview();
+}
+
+if(role==='employee'){
+  document.getElementById('nav').addEventListener('click', e=>{
+    const a=e.target.closest('a');if(!a)return;
+    e.preventDefault();e.stopImmediatePropagation();
+    document.querySelectorAll('.nav a').forEach(x=>x.classList.remove('active'));a.classList.add('active');
+    openEmployeeModule(a.textContent.trim());
+  },true);
+  document.getElementById('quick').addEventListener('click',e=>{
+    const a=e.target.closest('a');if(!a)return;e.preventDefault();
+    const label=a.textContent.trim();
+    const target=label==='My Department'?'Department':label==='Mark Attendance'?'Attendance Entry':label==='Enter Marks'?'Marks Entry':label;
+    openEmployeeModule(target);
+  },true);
+}
+
+
+
+// Student and Parent portal modules
+let studentDashboardData = null;
+let parentDashboardData = null;
+function money(value){
+  const n = Number(value || 0);
+  return '₹' + n.toLocaleString('en-IN', {maximumFractionDigits:2});
+}
+function moduleCards(items){
+  return '<div class="module-grid">' + items.map(x =>
+    '<div class="module-card"><small>'+escapeHTML(x[0])+'</small><b>'+escapeHTML(x[1] ?? 'Not available')+'</b></div>'
+  ).join('') + '</div>';
+}
+function moduleTable(headers, rows, emptyText){
+  if(!rows || !rows.length) return '<p class="classes-empty">'+escapeHTML(emptyText)+'</p>';
+  return '<div class="module-history"><div class="table-wrap"><table><thead><tr>'+headers.map(h=>'<th>'+escapeHTML(h)+'</th>').join('')+'</tr></thead><tbody>'+
+    rows.map(row=>'<tr>'+row.map(v=>'<td>'+escapeHTML(v ?? '')+'</td>').join('')+'</tr>').join('')+
+    '</tbody></table></div></div>';
+}
+async function fetchPortalData(){
+  const endpoint = role === 'parent' ? '/api/parent-dashboard' : '/api/student-dashboard';
+  const response = await fetch(endpoint, {credentials:'same-origin'});
+  const data = await response.json();
+  if(!response.ok || data.status !== 'success') throw new Error(data.message || 'Could not load portal information. Please sign in again.');
+  if(role === 'parent') parentDashboardData = data; else studentDashboardData = data;
+  return data;
+}
+function portalData(){ return role === 'parent' ? parentDashboardData : studentDashboardData; }
+function renderStudentParentModule(label){
+  const d = portalData();
+  const parent = role === 'parent';
+  const student = parent ? (d && d.student || {}) : (d && d.student || {});
+  const attendance = d && d.attendance || {};
+  const marks = d && d.marks || {};
+  const fees = d && d.fees || {};
+  let body = '';
+  if(label === 'Overview') { showOverviewView(); return; }
+  if(label === 'My Profile' || label === 'Child Profile'){
+    body = moduleCards([
+      ['Student Name', student.name], ['Student Email', student.email],
+      ['Department / Course', student.department], ['Year', student.year],
+      ['Student ID', student.student_id || 'Not available']
+    ]);
+  } else if(label === 'Attendance' || label === 'View Attendance' || label === 'Attendance Report'){
+    const rows = (attendance.records || []).map(x => [x.date || x.attendance_date || '', x.status || x.attendance_status || '']);
+    body = moduleCards([['Attendance', parent ? ((attendance.percentage ?? 0) + '%') : (attendance.percentage || '0%')],
+      ['Present Days', attendance.present_days ?? 'Not available'], ['Recorded Days', attendance.total_days ?? attendance.note ?? 'Not available']]) +
+      (parent ? moduleTable(['Date','Status'], rows, 'No attendance records are available yet.') : '<p>Detailed attendance records will appear here when they are available.</p>');
+  } else if(label === 'Marks & Results' || label === 'Academic Results'){
+    const rows = (marks.records || []).map(x => [x.subject || '', x.marks ?? '']);
+    body = moduleCards([['Marks Average', (marks.average ?? 0) + (parent ? '' : '/100')], ['Subjects Recorded', marks.subject_count ?? (rows.length || 0)]]) +
+      moduleTable(['Subject','Marks'], rows, 'No marks or result records are available yet.');
+  } else if(label === 'Timetable' || label === 'Exam Timetable'){
+    body = '<p>Your class and examination timetable will be displayed here when timetable records are added by the college.</p>';
+  } else if(label === 'Fees' || label === 'Fee Details'){
+    body = moduleCards([['Total Fee', money(fees.total_fee)], ['Paid Fee', money(fees.paid_fee)], ['Fee Balance', money(fees.balance)]]);
+  } else if(label === 'Announcements'){
+    body = '<p>No announcements are available at the moment.</p>';
+  } else {
+    body = '<p>This section is not available yet.</p>';
+  }
+  showModuleView(label, body);
+}
+async function openStudentParentModule(label){
+  if(label === 'Overview'){ renderStudentParentModule('Overview'); return; }
+  const view = document.getElementById('moduleView');
+  showModuleView(label, '<p>Loading information...</p>');
+  try {
+    if(!portalData()) await fetchPortalData();
+    renderStudentParentModule(label);
+  } catch(err) {
+    view.hidden = false;
+    view.innerHTML = '<h2>'+escapeHTML(label)+'</h2><p class="module-message">'+escapeHTML(err.message)+'</p>';
+  }
+}
+if(role === 'student' || role === 'parent'){
+  document.getElementById('nav').addEventListener('click', e=>{
+    const a=e.target.closest('a'); if(!a) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    document.querySelectorAll('.nav a').forEach(x=>x.classList.remove('active'));
+    a.classList.add('active');
+    openStudentParentModule(a.textContent.trim());
+  }, true);
+  document.getElementById('quick').addEventListener('click', e=>{
+    const a=e.target.closest('a'); if(!a) return;
+    e.preventDefault();
+    openStudentParentModule(a.textContent.trim());
+  }, true);
+}
+
+
+if (role === 'admin') {
+  // Admin overview is loaded via the protected administrator API.
+} else if (role === 'student') {
+  loadStudentDashboard();
+} else if (role === 'employee') {
+  loadEmployeeDashboard();
+} else if (role === 'parent') {
+  (async()=>{
+    const notice=document.querySelector('.notice');
+    try {
+      const data=await fetchPortalData();
+      const child=data.student || {};
+      document.getElementById('userName').textContent='Welcome Parent';
+      document.getElementById('welcome').textContent='Welcome, Parent!';
+      renderStats([
+        ['Child',''+(child.name || 'Student'),'Linked student','fa-user-graduate'],
+        ['Attendance',(data.attendance?.percentage ?? 0)+'%','Attendance percentage','fa-calendar-check'],
+        ['Marks Average',''+(data.marks?.average ?? 0),'Academic performance','fa-chart-line'],
+        ['Fee Balance',money(data.fees?.balance),'Outstanding fee','fa-wallet']
+      ]);
+      renderUpdates([
+        ['Student',child.name || 'Not available',''],
+        ['Department',child.department || 'Not available',''],
+        ['Attendance',String(data.attendance?.present_days ?? 0)+' present out of '+String(data.attendance?.total_days ?? 0),'']
+      ]);
+      notice.style.display='none';
+    } catch(error) {
+      notice.style.display='none';
+      console.error('Parent dashboard load error:', error);
+    }
+  })();
+} else {
+  loadStudentDashboard();
+}
+</script>
+<!-- Lillian AI Insight + Chatbot -->
+<style>
+.lit-ai-dock{position:fixed;right:22px;bottom:20px;z-index:10000;display:flex;gap:9px;flex-direction:column;align-items:flex-end;font-family:Arial,sans-serif}
+.lit-ai-launch{border:1px solid #ded2f5;border-radius:26px;padding:12px 17px;background:#fff;color:#65469a;font-weight:700;box-shadow:0 5px 22px #6d529a2b;cursor:pointer}
+.lit-ai-launch.primary{background:#7655ad;color:#fff;border-color:#7655ad}
+[data-open="litInsightPanel"],#litInsightPanel{display:none!important} /* Smart Insights is admin-only */
+.lit-ai-panel{display:none;flex-direction:column;width:min(390px,calc(100vw - 28px));height:min(540px,78vh);max-height:78vh;box-sizing:border-box;background:#fff;color:#332747;border:1px solid #e4daf5;border-radius:18px;box-shadow:0 12px 42px #44305d35;overflow:hidden;margin-bottom:4px}
+.lit-ai-panel[style*="display: block"]{display:flex!important}.lit-ai-panel[style*="display: flex"]{display:flex!important}
+.lit-ai-head{flex:0 0 auto;background:#eee7fb;color:#65469a;padding:14px;display:flex;align-items:center;justify-content:space-between;font-weight:700}
+.lit-ai-head small{display:block;font-weight:400;color:#796b8e;margin-top:3px}.lit-ai-head button{border:0;background:transparent;color:#65469a;font-size:22px;cursor:pointer}
+.lit-ai-log{flex:1 1 auto;min-height:0;height:auto;overflow-y:auto;overscroll-behavior:contain;padding:12px;background:#fcfaff}.lit-ai-msg{padding:10px 12px;border-radius:13px;margin:8px 0;max-width:90%;white-space:pre-wrap;line-height:1.45;font-size:14px}.lit-ai-bot{background:#fff;border:1px solid #e8e0f2}.lit-ai-user{background:#eee7fb;margin-left:auto}
+.lit-ai-form{display:flex;flex:0 0 auto;gap:7px;padding:12px;border-top:1px solid #eee7f5;background:#fff;min-height:62px;box-sizing:border-box}.lit-ai-form input{display:block;min-width:0;flex:1;padding:12px;border:1px solid #ded3ef;border-radius:10px;outline-color:#a88bd2}.lit-ai-form button{border:0;border-radius:10px;background:#7655ad;color:#fff;padding:0 14px;cursor:pointer}
+@media(max-width:480px){.lit-ai-dock{right:12px;bottom:12px}.lit-ai-panel{width:calc(100vw - 24px);height:68vh;max-height:68vh}.lit-ai-form{padding:10px}.lit-ai-form input{font-size:16px}}
+</style>
+<div class="lit-ai-dock" aria-label="AI tools">
+ <section class="lit-ai-panel" id="litInsightPanel"><div class="lit-ai-head"><span>✦ Lillian Smart Insights<small>Academic insights & performance analysis</small></span><button type="button" data-close="litInsightPanel">×</button></div><div class="lit-ai-log" id="litInsightLog"><div class="lit-ai-msg lit-ai-bot">Welcome! Ask for insights about your attendance, marks, academic progress or campus records.</div></div><form class="lit-ai-form" data-mode="insight"><input aria-label="Ask Lillian Smart Insights" placeholder="Ask for an academic insight..." required><button>Send</button></form></section>
+ <section class="lit-ai-panel" id="litChatPanel"><div class="lit-ai-head"><span>◉ Lillian Chatbot<small>Campus help & conversational support</small></span><button type="button" data-close="litChatPanel">×</button></div><div class="lit-ai-log" id="litChatLog"><div class="lit-ai-msg lit-ai-bot">Hello! Ask me about courses, departments, fees or college information.</div></div><form class="lit-ai-form" data-mode="chat"><input aria-label="Chat with Lillian" placeholder="Type your message..." required><button>Send</button></form></section>
+ <button class="lit-ai-launch" type="button" data-open="litInsightPanel">✦ Lillian Smart Insights</button><button class="lit-ai-launch primary" type="button" data-open="litChatPanel">▣ Chatbot</button>
+</div>
+<script>
+(()=>{const insightLaunch=document.querySelector('[data-open="litInsightPanel"]');if(insightLaunch)insightLaunch.hidden=true;const insightPanel=document.getElementById('litInsightPanel');if(insightPanel)insightPanel.remove();document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.lit-ai-panel').forEach(p=>p.style.display='none');const p=document.getElementById(b.dataset.open);if(p)p.style.display='block';}));document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{const p=document.getElementById(b.dataset.close);if(p)p.style.display='none';}));
+function add(log,text,who){const d=document.createElement('div');d.className='lit-ai-msg '+(who==='user'?'lit-ai-user':'lit-ai-bot');d.textContent=text;log.appendChild(d);log.scrollTop=log.scrollHeight;return d;}
+document.querySelectorAll('.lit-ai-form').forEach(form=>form.addEventListener('submit',async e=>{e.preventDefault();const input=form.querySelector('input'),q=input.value.trim();if(!q)return;input.value='';const insight=form.dataset.mode==='insight';const log=document.getElementById(insight?'litInsightLog':'litChatLog');add(log,q,'user');const pending=add(log,insight?'Analysing your academic information...':'Thinking...','bot');try{const prompt=insight?'Give a concise, evidence-based academic insight for this request. Use the authenticated user records when relevant. User question: '+q:q;const r=await fetch('/api/chat-agent',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:prompt,mode:insight?'insight':'chat'})});const data=await r.json();pending.textContent=data.reply||(r.ok?'No response received.':'Please sign in to use personal AI features.');}catch(err){pending.textContent='Unable to connect. Please check that the college server is running.';}}));})();
+</script>
+</body>

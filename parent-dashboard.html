@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parent Portal | Lillian Institute of Technology</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:#20334b;font-family:'DM Sans',sans-serif}.layout{display:flex;min-height:100vh}
+.sidebar{width:245px;background:#122d4d;color:#dce6f1;padding:25px 17px;flex-shrink:0}.brand{display:flex;align-items:center;gap:10px;padding:0 8px 30px;color:white;text-decoration:none}
+.mark{width:40px;height:40px;border-radius:10px;background:#ffffff16;color:#e6c17a;display:grid;place-items:center}.brand b{display:block;font:800 16px Manrope;letter-spacing:1.5px}.brand small{display:block;font-size:8px;letter-spacing:1.2px;margin-top:3px}
+.nav-label{font-size:9px;letter-spacing:1.6px;color:#8299b2;padding:14px 10px 9px}.nav a{display:flex;align-items:center;gap:12px;color:#c4d0df;text-decoration:none;padding:12px 11px;border-radius:7px;font-size:12px;margin:3px 0;cursor:pointer}
+.nav a.active,.nav a:hover{background:#ffffff16;color:#fff}.nav a i{width:17px;color:#e2bd75}.sidebar-bottom{margin-top:45px;padding:13px 10px;border-top:1px solid #ffffff20;font-size:10px;color:#9eb0c4;line-height:1.7}
+.main{flex:1;min-width:0}.topbar{height:72px;background:#fff;border-bottom:1px solid #e8edf3;display:flex;align-items:center;justify-content:space-between;padding:0 34px}.topbar small{font-size:11px;color:#8190a2}
+.user-chip{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700}.avatar{width:35px;height:35px;border-radius:50%;background:#e9eff6;color:#244c75;display:grid;place-items:center}
+.content{padding:32px 34px;max-width:1300px;margin:auto}.eyebrow{font-size:10px;letter-spacing:1.8px;color:#b08a4b;font-weight:700}.heading-row{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.heading-row h1{font:800 27px Manrope;color:#17385e;margin:8px 0}.date{font-size:10px;color:#718197;background:#fff;padding:10px 13px;border:1px solid #e6ebf1;border-radius:7px}
+.sub{font-size:12px;color:#7c8a9a;margin:0 0 25px}.notice{background:#fff8e9;border:1px solid #f0dfbd;color:#755b31;border-radius:8px;padding:12px 15px;font-size:11px;line-height:1.6;margin-bottom:22px}
+.notice.success{background:#edf9f0;border-color:#c8e8d0;color:#246338}.notice.error{background:#fff0f0;border-color:#f0caca;color:#963b3b}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.stat{background:#fff;border:1px solid #e9eef4;border-radius:9px;padding:18px}.stat-top{display:flex;justify-content:space-between;align-items:center;color:#8291a2;font-size:10px}
+.stat-icon{width:34px;height:34px;border-radius:9px;background:#eef3f8;color:#315c86;display:grid;place-items:center}.stat strong{display:block;font:800 25px Manrope;color:#17385e;margin:15px 0 3px}.stat small{font-size:9px;color:#8291a2}
+.section-title{font:700 15px Manrope;color:#17385e;margin:28px 0 13px}.panel{background:#fff;border:1px solid #e9eef4;border-radius:9px;padding:19px}.panel h3{font:700 13px Manrope;color:#17385e;margin:0 0 15px}
+.lower{display:grid;grid-template-columns:1.3fr .7fr;gap:16px}.row-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #edf1f5;font-size:11px}.row-item:last-child{border:0}.row-item span{color:#718197}
+.pill{background:#e9f5ee;color:#32815b;border-radius:20px;padding:5px 9px;font-size:9px;white-space:nowrap}.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.quick a{background:#f5f8fb;border:1px solid #e9eef4;border-radius:7px;padding:13px;text-decoration:none;color:#315779;font-size:10px}.quick a i{display:block;font-size:17px;margin-bottom:9px;color:#b28c4e}
+.module{margin-top:20px}.module h2{font:700 19px Manrope;color:#17385e;margin:0 0 15px}.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.info-card{background:#f7f9fc;border:1px solid #e8edf3;border-radius:8px;padding:15px}.info-card small{display:block;color:#8291a2;font-size:10px;margin-bottom:7px}.info-card b{color:#17385e;font-size:13px;overflow-wrap:anywhere}
+.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;background:white;font-size:11px}th,td{text-align:left;padding:12px;border-bottom:1px solid #edf0f5;white-space:nowrap}th{background:#f4f7fb;color:#315779}
+.empty{padding:16px;color:#718197;font-size:12px}.logout{display:inline-flex;margin-top:25px;color:#9a5a50;text-decoration:none;font-size:11px;font-weight:700}
+@media(max-width:900px){.sidebar{width:205px}.cards{grid-template-columns:repeat(2,1fr)}.lower{grid-template-columns:1fr}}
+@media(max-width:620px){.layout{display:block}.sidebar{width:auto;padding:13px}.brand{padding:0 6px 12px}.nav{display:flex;overflow:auto;gap:4px}.nav-label,.sidebar-bottom{display:none}.nav a{white-space:nowrap;padding:10px}.topbar{height:58px;padding:0 15px}.content{padding:22px 15px}.heading-row{display:block}.date{display:inline-block;margin-bottom:15px}.cards{gap:9px}.stat{padding:13px}.stat strong{font-size:21px}.quick{grid-template-columns:repeat(2,1fr)}}
+</style><style>
+/* Lillian Institute light lavender + white theme */
+:root{--lavender:#e9e2ff;--lavender-strong:#d8ccff;--lavender-soft:#f6f3ff;--ink:#393052;--muted:#756d8d;--line:#e7e0f5;--accent:#8b78c7;--accent-dark:#6f5aa8;--white:#fff}
+body{background:#faf9ff!important;color:var(--ink)!important}
+.site-header,.login-shell,.card,.panel,.content-card,.module-card,.stat-card,.table-wrap,.chat-panel{background:#fff!important}
+.topbar,footer{background:#eee9fb!important;color:#51486d!important}
+.brand,.text-link,.site-header nav>a:hover,.site-header nav>a.active{color:var(--accent-dark)!important}
+.brand-mark,.nav-login,.btn-gold,.chat-launcher{background:var(--lavender-strong)!important;color:#40365e!important}
+.nav-login i,.eyebrow,.section-tag,.program-card>small{color:var(--accent-dark)!important}
+.quick-stats,.programs-section,.departments-section,.faculty-section{background:var(--lavender-soft)!important}
+.program-card,.department-card,.faculty-card{background:#fff!important;border-color:var(--line)!important}
+.program-card.featured,.portal-section,.placement-band{background:linear-gradient(135deg,#e9e2ff,#dcd2fa)!important;color:var(--ink)!important;border-color:var(--lavender-strong)!important}
+.program-card.featured p,.portal-inner>div:first-child>p,.portal-card small,.placement-inner>p{color:#625a79!important}
+.portal-card{background:#ffffffb8!important;border-color:#d8ccf0!important;color:var(--ink)!important}
+.portal-card b,.portal-inner h2,.placement-inner h2{color:var(--ink)!important}
+footer .footer-grid h4,footer .footer-brand{color:var(--ink)!important}
+footer .footer-grid p,footer .footer-grid a,footer .footer-grid span,.copyright{color:#6e6684!important}
+.hero-shade{background:linear-gradient(90deg,rgba(48,39,78,.78),rgba(75,62,112,.52),rgba(75,62,112,.12))!important}
+.chat-head{background:var(--accent-dark)!important}
+.chat-input button,#lit-agent-launch{background:var(--accent)!important;color:#fff!important}
+.chat-panel,.chat-body,#lit-agent-panel{border-color:var(--line)!important}
+.sidebar{background:#eee9fb!important;color:#51486d!important;border-right:1px solid var(--line)!important}
+.sidebar .brand,.sidebar .brand b,.sidebar a,.sidebar button{color:#51486d!important}
+.sidebar .active,.sidebar a.active,.sidebar button.active{background:#ded5f7!important;color:#493d70!important}
+.main,.main-content,.content,.page-content{background:#faf9ff!important}
+.header,.topbar,.top-header{background:#fff!important;color:var(--ink)!important;border-bottom:1px solid var(--line)!important}
+.card,.panel,.stat-card,.metric-card,.section-card,.table-container{border-color:var(--line)!important;box-shadow:0 5px 20px rgba(100,82,145,.07)!important}
+button,.primary-btn,.btn-primary{background:var(--accent)!important;color:#fff!important;border-color:var(--accent)!important}
+input,select,textarea{border-color:#ded6ef!important;background:#fff!important;color:var(--ink)!important}
+.badge,.tag,.pill{background:#eee9fb!important;color:#62528e!important}
+@media(max-width:700px){.site-header nav{background:#fff!important}}
+</style>
+</head>
+<body><div class="layout">
+<aside class="sidebar"><a class="brand" href="/index.html"><span class="mark"><i class="fa-solid fa-building-columns"></i></span><span><b>LILLIAN</b><small>INSTITUTE OF TECHNOLOGY</small></span></a>
+<div class="nav-label">PARENT MENU</div><nav class="nav" id="nav">
+<a href="#" data-view="overview" class="active"><i class="fa-solid fa-chart-pie"></i>Overview</a>
+<a href="#" data-view="profile"><i class="fa-solid fa-user-graduate"></i>Child Profile</a>
+<a href="#" data-view="attendance"><i class="fa-solid fa-calendar-check"></i>Attendance</a>
+<a href="#" data-view="marks"><i class="fa-solid fa-square-poll-vertical"></i>Academic Results</a>
+<a href="#" data-view="fees"><i class="fa-solid fa-wallet"></i>Fee Details</a>
+<a href="#" data-view="announcements"><i class="fa-solid fa-bullhorn"></i>Announcements</a></nav>
+<div class="sidebar-bottom">Lillian Institute of Technology<br>Parent & Family Services</div></aside>
+<main class="main"><header class="topbar"><small>Parent Portal</small><div class="user-chip"><span id="parentLabel">Parent Account</span><span class="avatar"><i class="fa-solid fa-people-roof"></i></span></div></header>
+<section class="content"><div class="eyebrow">LILLIAN DIGITAL CAMPUS</div><div class="heading-row"><h1 id="welcome">Welcome, Parent!</h1><span class="date" id="today"></span></div>
+<p class="sub">Stay connected with your child's academic progress.</p><div class="notice" id="notice" role="status">Loading your child's information from the college database...</div>
+<div id="overview"><div class="cards" id="stats"></div><h2 class="section-title">Your Child's Overview</h2><div class="lower">
+<div class="panel"><h3>Academic Updates</h3><div id="updates"></div></div>
+<div class="panel"><h3>Quick Access</h3><div class="quick">
+<a href="#" data-view="profile"><i class="fa-solid fa-user-graduate"></i>Child Profile</a><a href="#" data-view="attendance"><i class="fa-solid fa-calendar-check"></i>Attendance</a>
+<a href="#" data-view="marks"><i class="fa-solid fa-square-poll-vertical"></i>Academic Results</a><a href="#" data-view="fees"><i class="fa-solid fa-wallet"></i>Fee Details</a>
+</div></div></div></div><div id="module" class="panel module" hidden></div>
+<a class="logout" href="#" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></section></main></div>
+<script>
+const state={student:null,attendance:null,marks:null,fees:null};
+const money=v=>'₹'+Number(v||0).toLocaleString('en-IN');
+const safe=v=>String(v??'-').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+document.getElementById('today').textContent=new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+function showNotice(t,c=''){const n=document.getElementById('notice');n.textContent=t;n.className='notice '+c;}
+function renderOverview(){const s=state.student,a=state.attendance,m=state.marks,f=state.fees;
+document.getElementById('parentLabel').textContent='Parent of '+(s.name||'Student');
+document.getElementById('stats').innerHTML=[
+['Attendance',(a.percentage||0)+'%',(a.present_days||0)+' present out of '+(a.total_days||0)+' recorded days','fa-calendar-check'],
+['Average Marks',(m.average||0)+'/100',(m.records||[]).length+' subject records','fa-chart-line'],
+['Fees Paid',money(f.paid_fee),'Total fee: '+money(f.total_fee),'fa-wallet'],['Fee Balance',money(f.balance),'Outstanding amount','fa-receipt']
+].map(x=>'<div class="stat"><div class="stat-top"><span>'+x[0]+'</span><span class="stat-icon"><i class="fa-solid '+x[3]+'"></i></span></div><strong>'+x[1]+'</strong><small>'+x[2]+'</small></div>').join('');
+document.getElementById('updates').innerHTML=[['Student',s.name,'Profile'],['Attendance',(a.percentage||0)+'%','Updated'],['Average marks',(m.average||0)+'/100','Results'],['Fee balance',money(f.balance),'Fees']]
+.map(x=>'<div class="row-item"><div><b>'+safe(x[0])+'</b><br><span>'+safe(x[1])+'</span></div><span class="pill">'+safe(x[2])+'</span></div>').join('');}
+function openView(view){document.getElementById('overview').hidden=view!=='overview';const box=document.getElementById('module');box.hidden=view==='overview';
+document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('active',a.dataset.view===view));if(view==='overview')return;
+const s=state.student,a=state.attendance,m=state.marks,f=state.fees;let title='',html='';
+if(view==='profile'){title='Child Profile';html='<div class="info-grid">'+[['Student Name',s.name],['Student ID',s.student_id],['Email Address',s.email],['Department / Course',s.department],['Year',s.year]].map(x=>'<div class="info-card"><small>'+x[0]+'</small><b>'+safe(x[1])+'</b></div>').join('')+'</div>';}
+else if(view==='attendance'){title='Attendance Report';html='<div class="info-grid"><div class="info-card"><small>Attendance</small><b>'+safe(a.percentage)+'%</b></div><div class="info-card"><small>Present Days</small><b>'+safe(a.present_days)+'</b></div><div class="info-card"><small>Total Recorded Days</small><b>'+safe(a.total_days)+'</b></div></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Status</th></tr></thead><tbody>'+((a.records||[]).map(x=>'<tr><td>'+safe(x.date)+'</td><td>'+safe(x.status)+'</td></tr>').join('')||'<tr><td colspan="2" class="empty">No attendance records available yet.</td></tr>')+'</tbody></table></div>';}
+else if(view==='marks'){title='Academic Results';html='<div class="info-card" style="margin-bottom:14px"><small>Average Marks</small><b>'+safe(m.average)+'/100</b></div><div class="table-wrap"><table><thead><tr><th>Subject</th><th>Marks</th></tr></thead><tbody>'+((m.records||[]).map(x=>'<tr><td>'+safe(x.subject)+'</td><td>'+safe(x.marks)+'</td></tr>').join('')||'<tr><td colspan="2" class="empty">No marks available yet.</td></tr>')+'</tbody></table></div>';}
+else if(view==='fees'){title='Fee Details';html='<div class="info-grid">'+[['Total Fee',money(f.total_fee)],['Fees Paid',money(f.paid_fee)],['Fee Balance',money(f.balance)]].map(x=>'<div class="info-card"><small>'+x[0]+'</small><b>'+x[1]+'</b></div>').join('')+'</div>';}
+else{title='Announcements';html='<p class="empty">No announcements are available at the moment. Please check again later or contact the college office.</p>';}
+box.innerHTML='<h2>'+title+'</h2>'+html;}
+async function loadDashboard(){try{const r=await fetch('/api/parent-dashboard',{credentials:'same-origin',headers:{'Accept':'application/json'}});const d=await r.json();
+if(!r.ok||d.status!=='success')throw new Error(d.message||'Unable to load parent dashboard.');
+state.student=d.student||{};state.attendance=d.attendance||{};state.marks=d.marks||{};state.fees=d.fees||{};renderOverview();showNotice("Your child's latest academic information is shown below.",'success');
+}catch(e){showNotice(e.message+' Please sign in again using your parent email, Student ID and password.','error');document.getElementById('overview').hidden=true;const box=document.getElementById('module');box.hidden=false;box.innerHTML='<h2>Parent Dashboard Unavailable</h2><p>'+safe(e.message)+'</p><a href="/login.html?role=parent">Return to Parent Login</a>';}}
+document.getElementById('nav').addEventListener('click',e=>{const a=e.target.closest('[data-view]');if(!a)return;e.preventDefault();openView(a.dataset.view);});
+document.querySelectorAll('.quick [data-view]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openView(a.dataset.view);}));
+document.getElementById('logoutBtn').addEventListener('click',async e=>{e.preventDefault();try{await fetch('/api/logout',{method:'POST',credentials:'same-origin'});}finally{location.href='/login.html?role=parent';}});
+loadDashboard();
+</script>
+<!-- Lillian AI Insight + Chatbot -->
+<style>
+.lit-ai-dock{position:fixed;right:22px;bottom:20px;z-index:10000;display:flex;gap:9px;flex-direction:column;align-items:flex-end;font-family:Arial,sans-serif}
+.lit-ai-launch{border:1px solid #ded2f5;border-radius:26px;padding:12px 17px;background:#fff;color:#65469a;font-weight:700;box-shadow:0 5px 22px #6d529a2b;cursor:pointer}
+.lit-ai-launch.primary{background:#7655ad;color:#fff;border-color:#7655ad}
+[data-open="litInsightPanel"],#litInsightPanel{display:none!important} /* Smart Insights is admin-only */
+.lit-ai-panel{display:none;flex-direction:column;width:min(390px,calc(100vw - 28px));height:min(540px,78vh);max-height:78vh;box-sizing:border-box;background:#fff;color:#332747;border:1px solid #e4daf5;border-radius:18px;box-shadow:0 12px 42px #44305d35;overflow:hidden;margin-bottom:4px}
+.lit-ai-panel[style*="display: block"]{display:flex!important}.lit-ai-panel[style*="display: flex"]{display:flex!important}
+.lit-ai-head{flex:0 0 auto;background:#eee7fb;color:#65469a;padding:14px;display:flex;align-items:center;justify-content:space-between;font-weight:700}
+.lit-ai-head small{display:block;font-weight:400;color:#796b8e;margin-top:3px}.lit-ai-head button{border:0;background:transparent;color:#65469a;font-size:22px;cursor:pointer}
+.lit-ai-log{flex:1 1 auto;min-height:0;height:auto;overflow-y:auto;overscroll-behavior:contain;padding:12px;background:#fcfaff}.lit-ai-msg{padding:10px 12px;border-radius:13px;margin:8px 0;max-width:90%;white-space:pre-wrap;line-height:1.45;font-size:14px}.lit-ai-bot{background:#fff;border:1px solid #e8e0f2}.lit-ai-user{background:#eee7fb;margin-left:auto}
+.lit-ai-form{display:flex;flex:0 0 auto;gap:7px;padding:12px;border-top:1px solid #eee7f5;background:#fff;min-height:62px;box-sizing:border-box}.lit-ai-form input{display:block;min-width:0;flex:1;padding:12px;border:1px solid #ded3ef;border-radius:10px;outline-color:#a88bd2}.lit-ai-form button{border:0;border-radius:10px;background:#7655ad;color:#fff;padding:0 14px;cursor:pointer}
+@media(max-width:480px){.lit-ai-dock{right:12px;bottom:12px}.lit-ai-panel{width:calc(100vw - 24px);height:68vh;max-height:68vh}.lit-ai-form{padding:10px}.lit-ai-form input{font-size:16px}}
+</style>
+<div class="lit-ai-dock" aria-label="AI tools">
+ <section class="lit-ai-panel" id="litInsightPanel"><div class="lit-ai-head"><span>✦ Lillian Smart Insights<small>Academic insights & performance analysis</small></span><button type="button" data-close="litInsightPanel">×</button></div><div class="lit-ai-log" id="litInsightLog"><div class="lit-ai-msg lit-ai-bot">Welcome! Ask for insights about your attendance, marks, academic progress or campus records.</div></div><form class="lit-ai-form" data-mode="insight"><input aria-label="Ask Lillian Smart Insights" placeholder="Ask for an academic insight..." required><button>Send</button></form></section>
+ <section class="lit-ai-panel" id="litChatPanel"><div class="lit-ai-head"><span>◉ Lillian Chatbot<small>Campus help & conversational support</small></span><button type="button" data-close="litChatPanel">×</button></div><div class="lit-ai-log" id="litChatLog"><div class="lit-ai-msg lit-ai-bot">Hello! Ask me about courses, departments, attendance, marks, fees or college information.</div></div><form class="lit-ai-form" data-mode="chat"><input aria-label="Chat with Lillian" placeholder="Type your message..." required><button>Send</button></form></section>
+ <button class="lit-ai-launch" type="button" data-open="litInsightPanel">✦ Lillian Smart Insights</button><button class="lit-ai-launch primary" type="button" data-open="litChatPanel">▣ Chatbot</button>
+</div>
+<script>
+(()=>{document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.lit-ai-panel').forEach(p=>p.style.display='none');const p=document.getElementById(b.dataset.open);if(p)p.style.display='block';}));document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{const p=document.getElementById(b.dataset.close);if(p)p.style.display='none';}));
+function add(log,text,who){const d=document.createElement('div');d.className='lit-ai-msg '+(who==='user'?'lit-ai-user':'lit-ai-bot');d.textContent=text;log.appendChild(d);log.scrollTop=log.scrollHeight;return d;}
+document.querySelectorAll('.lit-ai-form').forEach(form=>form.addEventListener('submit',async e=>{e.preventDefault();const input=form.querySelector('input'),q=input.value.trim();if(!q)return;input.value='';const insight=form.dataset.mode==='insight';const log=document.getElementById(insight?'litInsightLog':'litChatLog');add(log,q,'user');const pending=add(log,insight?'Analysing your academic information...':'Thinking...','bot');try{const prompt=insight?'Give a concise, evidence-based academic insight for this request. Use the authenticated user records when relevant. User question: '+q:q;const r=await fetch('/api/chat-agent',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:prompt,mode:insight?'insight':'chat'})});const data=await r.json();pending.textContent=data.reply||(r.ok?'No response received.':'Please sign in to use personal AI features.');}catch(err){pending.textContent='Unable to connect. Please check that the college server is running.';}}));})();
+</script>
+</body>

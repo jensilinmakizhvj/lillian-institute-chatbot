@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Login | Lillian Institute of Technology</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;font-family:'DM Sans',sans-serif;color:#1b2e46;background:linear-gradient(115deg,rgba(9,29,53,.94),rgba(20,56,91,.78)),url('https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1800&q=85') center/cover fixed;display:flex;align-items:center;justify-content:center;padding:28px}
+    .login-shell{width:min(1260px,100%);min-height:680px;display:grid;grid-template-columns:.95fr 1.05fr;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 25px 80px #06172d66}
+    .welcome-panel{padding:48px 54px;background:linear-gradient(150deg,#17385e,#102846);color:#fff;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+    .welcome-panel:after{content:'L';position:absolute;right:-15px;bottom:-100px;font:800 330px 'Manrope';color:#ffffff0a}
+    .brand{display:flex;align-items:center;gap:11px;position:relative;z-index:1;color:#fff;text-decoration:none}.brand-mark{width:43px;height:43px;border-radius:11px;background:#ffffff16;color:#e7c47d;display:grid;place-items:center;font-size:21px}.brand strong{display:block;font:800 18px 'Manrope';letter-spacing:2px}.brand small{display:block;font-size:8px;letter-spacing:1.7px;font-weight:700;margin-top:3px}
+    .welcome-copy{position:relative;z-index:1;margin:60px 0}.eyebrow{font-size:10px;letter-spacing:2px;color:#e7c47d;font-weight:700}.welcome-copy h1{font:800 42px/1.2 'Manrope';margin:16px 0}.welcome-copy h1 em{font-style:normal;color:#e7c47d}.welcome-copy p{font-size:16px;line-height:1.9;color:#d0dbe7;max-width:390px}
+    .form-panel{padding:58px 72px;display:flex;flex-direction:column;justify-content:center}.back{font-size:12px;font-weight:700;color:#65758a;text-decoration:none;margin-bottom:32px}.back i{margin-right:7px;color:#bd9655}.form-panel h2{font:800 34px 'Manrope';color:#17385e;margin:0 0 8px}.subtitle{font-size:14px;color:#7a899a;margin:0 0 26px}.role-pill{display:inline-flex;align-items:center;gap:8px;background:#f5f0e6;color:#94713c;border-radius:30px;padding:10px 15px;font-size:12px;font-weight:700;text-transform:capitalize;width:max-content;margin-bottom:24px}
+    label{display:block;font-size:13px;font-weight:700;color:#344b65;margin:17px 0 9px}.field{position:relative}.field input{width:100%;padding:17px 44px 17px 16px;border:1px solid #dce3eb;border-radius:7px;font:14px 'DM Sans';outline:none}.field input:focus{border-color:#416a94;box-shadow:0 0 0 3px #17385e12}.field i{position:absolute;right:16px;top:17px;color:#8291a2;font-size:15px}.field .toggle{cursor:pointer}
+    .form-options{display:flex;justify-content:space-between;align-items:center;margin:18px 0 25px;font-size:12px;color:#718096}.remember{display:flex;align-items:center;gap:8px}.remember input{accent-color:#17385e}.form-options a{color:#315b83;text-decoration:none;font-weight:700}.submit{width:100%;padding:17px;border:0;border-radius:7px;background:#17385e;color:#fff;font:700 14px 'DM Sans';cursor:pointer}.submit:hover{background:#244e78}.submit:disabled{opacity:.7;cursor:wait}.submit i{margin-left:9px;color:#e7c47d}.demo-note{font-size:11px;line-height:1.7;color:#929eac;text-align:center;margin:18px 0 0}.message{display:none;padding:12px 14px;background:#fff6e6;border:1px solid #f0dfbd;color:#775b2d;border-radius:7px;font-size:12px;line-height:1.6;margin-top:15px}.message.show{display:block}.message.error{background:#fff0f0;border-color:#f0caca;color:#963b3b}.message.success{background:#edf9f0;border-color:#c8e8d0;color:#246338}
+    @media(max-width:760px){body{padding:12px}.login-shell{grid-template-columns:1fr}.welcome-panel{padding:25px;min-height:260px}.welcome-copy{margin:30px 0 15px}.welcome-copy h1{font-size:29px}.welcome-copy p{font-size:12px}.form-panel{padding:30px 25px}.form-panel h2{font-size:27px}.back{margin-bottom:22px}}
+  </style>
+<style>
+/* Lillian Institute light lavender + white theme */
+:root{--lavender:#e9e2ff;--lavender-strong:#d8ccff;--lavender-soft:#f6f3ff;--ink:#393052;--muted:#756d8d;--line:#e7e0f5;--accent:#8b78c7;--accent-dark:#6f5aa8;--white:#fff}
+body{background:#faf9ff!important;color:var(--ink)!important}
+.site-header,.login-shell,.card,.panel,.content-card,.module-card,.stat-card,.table-wrap,.chat-panel{background:#fff!important}
+.topbar,footer{background:#eee9fb!important;color:#51486d!important}
+.brand,.text-link,.site-header nav>a:hover,.site-header nav>a.active{color:var(--accent-dark)!important}
+.brand-mark,.nav-login,.btn-gold,.chat-launcher{background:var(--lavender-strong)!important;color:#40365e!important}
+.nav-login i,.eyebrow,.section-tag,.program-card>small{color:var(--accent-dark)!important}
+.quick-stats,.programs-section,.departments-section,.faculty-section{background:var(--lavender-soft)!important}
+.program-card,.department-card,.faculty-card{background:#fff!important;border-color:var(--line)!important}
+.program-card.featured,.portal-section,.placement-band{background:linear-gradient(135deg,#e9e2ff,#dcd2fa)!important;color:var(--ink)!important;border-color:var(--lavender-strong)!important}
+.program-card.featured p,.portal-inner>div:first-child>p,.portal-card small,.placement-inner>p{color:#625a79!important}
+.portal-card{background:#ffffffb8!important;border-color:#d8ccf0!important;color:var(--ink)!important}
+.portal-card b,.portal-inner h2,.placement-inner h2{color:var(--ink)!important}
+footer .footer-grid h4,footer .footer-brand{color:var(--ink)!important}
+footer .footer-grid p,footer .footer-grid a,footer .footer-grid span,.copyright{color:#6e6684!important}
+.hero-shade{background:linear-gradient(90deg,rgba(48,39,78,.78),rgba(75,62,112,.52),rgba(75,62,112,.12))!important}
+.chat-head{background:var(--accent-dark)!important}
+.chat-input button,#lit-agent-launch{background:var(--accent)!important;color:#fff!important}
+.chat-panel,.chat-body,#lit-agent-panel{border-color:var(--line)!important}
+.sidebar{background:#eee9fb!important;color:#51486d!important;border-right:1px solid var(--line)!important}
+.sidebar .brand,.sidebar .brand b,.sidebar a,.sidebar button{color:#51486d!important}
+.sidebar .active,.sidebar a.active,.sidebar button.active{background:#ded5f7!important;color:#493d70!important}
+.main,.main-content,.content,.page-content{background:#faf9ff!important}
+.header,.topbar,.top-header{background:#fff!important;color:var(--ink)!important;border-bottom:1px solid var(--line)!important}
+.card,.panel,.stat-card,.metric-card,.section-card,.table-container{border-color:var(--line)!important;box-shadow:0 5px 20px rgba(100,82,145,.07)!important}
+button,.primary-btn,.btn-primary{background:var(--accent)!important;color:#fff!important;border-color:var(--accent)!important}
+input,select,textarea{border-color:#ded6ef!important;background:#fff!important;color:var(--ink)!important}
+.badge,.tag,.pill{background:#eee9fb!important;color:#62528e!important}
+@media(max-width:700px){.site-header nav{background:#fff!important}}
+</style>
+</head>
+<body>
+  <div class="login-shell">
+    <section class="welcome-panel">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"><i class="fa-solid fa-building-columns"></i></span>
+        <span><strong>LILLIAN</strong><small>INSTITUTE OF TECHNOLOGY</small></span>
+      </a>
+      <div class="welcome-copy">
+        <div class="eyebrow">YOUR DIGITAL CAMPUS</div>
+        <h1>Welcome to your<br><em>learning space.</em></h1>
+        <p>Sign in to connect with your college services, academic information and campus community.</p>
+      </div>
+    </section>
+    <section class="form-panel">
+      <a class="back" href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to college website</a>
+      <h2 id="heading">Welcome back</h2>
+      <p class="subtitle">Enter your account details to continue.</p>
+      <div class="role-pill"><i id="roleIcon" class="fa-solid fa-user-graduate"></i><span id="roleLabel">Student Portal</span></div>
+      <form id="loginForm">
+        <label for="userId" id="userIdLabel">Email address</label>
+        <div class="field"><input id="userId" type="email" placeholder="Enter student email" autocomplete="username" required><i class="fa-regular fa-user"></i></div>
+        <div id="studentIdWrap" style="display:none">
+          <label for="studentId">Student ID</label>
+          <div class="field"><input id="studentId" type="text" placeholder="e.g. LIT-BE-CSE-1-001" autocomplete="off"><i class="fa-solid fa-id-card"></i></div>
+        </div>
+        <label for="password">Password</label>
+        <div class="field"><input id="password" type="password" placeholder="Enter your password" autocomplete="current-password" required><i class="fa-regular fa-eye toggle" id="togglePassword"></i></div>
+        <div class="form-options"><label class="remember"><input type="checkbox"> Remember me</label><a href="#" id="forgotLink">Forgot password?</a></div>
+        <button class="submit" id="submitButton" type="submit">Sign In <i class="fa-solid fa-arrow-right"></i></button>
+        <div class="message" id="message" role="alert"></div>
+        <p class="demo-note">Student and employee accounts use their registered email. Parent accounts use email + Student ID.</p>
+      </form>
+    </section>
+  </div>
+  <script>
+    const role = (new URLSearchParams(location.search).get('role') || 'student').toLowerCase();
+
+    const roles = {
+      student: {
+        label: 'Student Portal',
+        icon: 'fa-user-graduate',
+        heading: 'Student sign in',
+        endpoint: '/api/login',
+        dashboard: '/dashboard.html?role=student'
+      },
+      employee: {
+        label: 'Faculty & Employee Portal',
+        icon: 'fa-chalkboard-user',
+        heading: 'Faculty / Employee sign in',
+        endpoint: '/api/employee-login',
+        dashboard: '/dashboard.html?role=employee'
+      },
+      admin: {
+        label: 'Administrator Portal',
+        icon: 'fa-user-shield',
+        heading: 'Administrator sign in',
+        endpoint: '/api/admin-login',
+        dashboard: '/?insights=1'
+      },
+      parent: {
+        label: 'Parent Portal',
+        icon: 'fa-people-roof',
+        heading: 'Parent sign in',
+        endpoint: '/api/parent-login',
+        dashboard: '/parent-dashboard.html'
+      }
+    };
+
+    const selected = roles[role] || roles.student;
+    const message = document.getElementById('message');
+    const button = document.getElementById('submitButton');
+
+    document.getElementById('roleLabel').textContent = selected.label;
+    document.getElementById('roleIcon').className = 'fa-solid ' + selected.icon;
+    document.getElementById('heading').textContent = selected.heading;
+    const userIdInput = document.getElementById('userId');
+    const userIdLabel = document.getElementById('userIdLabel');
+    const studentIdWrap = document.getElementById('studentIdWrap');
+    if (role === 'admin') {
+      userIdLabel.textContent = 'Admin Username';
+      userIdInput.type = 'text'; userIdInput.placeholder = 'Enter admin username';
+    } else if (role === 'employee') {
+      userIdLabel.textContent = 'Employee Email Address';
+      userIdInput.type = 'email'; userIdInput.placeholder = 'Enter your registered employee email';
+    } else if (role === 'parent') {
+      userIdLabel.textContent = 'Parent Email Address';
+      userIdInput.type = 'email';
+      userIdInput.placeholder = 'Enter your email address';
+      studentIdWrap.style.display = 'block';
+      document.getElementById('studentId').required = true;
+    } else {
+      userIdLabel.textContent = 'Student Email Address';
+      userIdInput.type = 'email';
+      userIdInput.placeholder = 'Enter registered student email';
+    }
+
+    function showMessage(text, type) {
+      message.textContent = text;
+      message.className = 'message show ' + (type || '');
+    }
+
+    document.getElementById('togglePassword').addEventListener('click', () => {
+      const passwordInput = document.getElementById('password');
+      const show = passwordInput.type === 'password';
+      passwordInput.type = show ? 'text' : 'password';
+      document.getElementById('togglePassword').className =
+        'fa-regular ' + (show ? 'fa-eye-slash' : 'fa-eye') + ' toggle';
+    });
+
+    document.getElementById('forgotLink').addEventListener('click', event => {
+      event.preventDefault();
+      showMessage('Please contact the college administrator to reset your account password.', 'error');
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', async event => {
+      event.preventDefault();
+
+      const enteredId = document.getElementById('userId').value.trim();
+      const password = document.getElementById('password').value;
+      if (role === 'parent') {
+        const studentCode = document.getElementById('studentId').value.trim().toUpperCase();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(enteredId)) {
+          showMessage('Please enter a valid parent email address.', 'error');
+          return;
+        }
+        if (!studentCode) {
+          showMessage('Please enter your child’s Student ID.', 'error');
+          return;
+        }
+      }
+
+      const payload = role === 'admin'
+        ? {username: enteredId, password}
+        : role === 'employee'
+        ? {email: enteredId.toLowerCase(), password}
+        : role === 'parent'
+          ? {email: enteredId.toLowerCase(), student_id: document.getElementById('studentId').value.trim().toUpperCase(), password}
+          : {email: enteredId.toLowerCase(), password};
+
+      button.disabled = true;
+      button.innerHTML = 'Verifying... <i class="fa-solid fa-spinner fa-spin"></i>';
+      message.className = 'message';
+
+      try {
+        const response = await fetch(selected.endpoint, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || data.status !== 'success') {
+          showMessage(data.message || 'Login failed. Please check your details.', 'error');
+          return;
+        }
+
+        showMessage('Login successful. Opening your dashboard...', 'success');
+        setTimeout(() => {
+          window.location.href = selected.dashboard;
+        }, 500);
+
+      } catch (error) {
+        showMessage('Cannot connect to the server. Please check that Flask is running.', 'error');
+      } finally {
+        button.disabled = false;
+        button.innerHTML = 'Sign In <i class="fa-solid fa-arrow-right"></i>';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lillian Institute of Technology</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    .faculty-directory { margin-top: 58px; }
+    .faculty-directory-heading { margin-bottom: 26px; }
+    .faculty-directory-heading h3 { font-family: 'Manrope', sans-serif; font-size: clamp(1.45rem, 3vw, 2rem); margin: 8px 0; color: #172b50; }
+    .faculty-directory-heading h3 em { color: #c49a51; font-style: normal; }
+    .faculty-department-group { margin: 30px 0 38px; }
+    .faculty-department-title { color: #172b50; font-family: 'Manrope', sans-serif; font-size: 1.25rem; margin: 0 0 16px; }
+    .faculty-directory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .faculty-directory-card { background: #fff; border: 1px solid #e8edf5; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 28px rgba(20, 42, 78, .07); }
+    .faculty-directory-avatar { height: 112px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #172b50, #31588b); color: #fff; font: 800 2rem 'Manrope', sans-serif; letter-spacing: 1px; }
+    .faculty-directory-card .faculty-details { padding: 18px; }
+    .faculty-directory-role { display: inline-block; color: #a77c32; background: #fbf4e7; border-radius: 30px; padding: 5px 10px; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; }
+    .faculty-directory-name { color: #172b50; font-size: 1.05rem; margin: 11px 0 6px; }
+    .faculty-directory-email { color: #65748b; font-size: .84rem; overflow-wrap: anywhere; margin: 0; }
+    @media (max-width: 600px) { .faculty-directory-grid { grid-template-columns: 1fr; } }
+    .faculty-department-list { margin-top: 24px; }
+    .faculty-department-list .faculty-department-group { margin: 0 0 26px; }
+    .faculty-department-list .faculty-department-title { margin: 0 0 10px; color: #172b50; font-family: 'Manrope', sans-serif; font-size: 1.15rem; }
+    .faculty-department-list ul { margin: 0; padding-left: 22px; color: #52627a; line-height: 1.9; }
+    .faculty-department-list li { padding-left: 3px; }
+
+  
+.admin-add-actions{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}
+#adminCreatePanel[hidden],#studentFormWrap[hidden],#employeeFormWrap[hidden]{display:none!important}
+.admin-create-form{max-width:650px}
+</style>
+
+
+<style>
+/* Admin dashboard - shown only after authenticated admin session */
+#litAdminDashboard{display:none;background:#faf9ff;padding:34px 0 70px;min-height:70vh}
+body.is-admin #litAdminDashboard{display:block}
+body.is-admin main>section:not(#litAdminDashboard),body.is-admin .ai-insight-banner,
+body.is-admin .announcement-ticker,body.is-admin footer{display:none!important}
+.admin-wrap{width:min(1320px,92%);margin:auto}
+.admin-heading{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:22px}
+.admin-heading h1{font:800 clamp(24px,3vw,34px) Manrope;color:#493d70;margin:5px 0}
+.admin-heading p{color:#756d8d;font-size:13px;margin:0}
+.admin-label{font-size:10px;letter-spacing:1.8px;color:#8b78c7;font-weight:800}
+.admin-tools{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.admin-tools input{flex:1;min-width:220px;padding:12px 14px;border:1px solid #ded6ef;border-radius:9px;background:#fff;color:#393052}
+.admin-tools button,.admin-tab{border:1px solid #ded6ef;border-radius:9px;padding:11px 14px;background:#fff;color:#62528e;cursor:pointer;font-weight:700}
+.admin-tab.active,.admin-tools button.primary{background:#8b78c7;color:white;border-color:#8b78c7}
+.admin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.admin-panel{background:#fff;border:1px solid #e7e0f5;border-radius:13px;padding:20px;box-shadow:0 5px 20px rgba(100,82,145,.06)}
+.admin-panel h2{font:700 18px Manrope;color:#493d70;margin:0 0 14px}
+.admin-status{font-size:12px;color:#756d8d;margin:12px 0}
+.admin-table-wrap{overflow:auto;max-width:100%}
+.admin-table{border-collapse:collapse;width:100%;min-width:720px;font-size:12px}
+.admin-table th,.admin-table td{padding:11px 12px;border-bottom:1px solid #eee9f7;text-align:left;white-space:nowrap}
+.admin-table th{background:#f5f2fc;color:#62528e;font-weight:800;position:sticky;top:0}
+.admin-empty{padding:24px;text-align:center;color:#756d8d;font-size:13px}
+.admin-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0}
+.admin-summary div{background:#f6f3ff;border:1px solid #e7e0f5;border-radius:10px;padding:16px}
+.admin-summary small{display:block;color:#756d8d;font-size:11px}
+.admin-summary b{display:block;color:#493d70;font:800 24px Manrope;margin-top:7px}
+.admin-insights-panel{margin:20px 0;background:linear-gradient(135deg,#fff,#f8f5ff)}
+.admin-insights-panel h2{margin-bottom:7px}
+.admin-insights-help{font-size:12px;color:#756d8d;margin:0}
+body.is-admin .nav-login{display:none!important}
+body.is-admin #litInsightPanel{display:none!important}
+
+@media(max-width:650px){#litAdminDashboard{padding:24px 0}.admin-heading{display:block}.admin-panel{padding:13px}.admin-tabs{gap:6px}.admin-tab{font-size:11px;padding:9px}}
+
+.admin-insight-answer{white-space:pre-wrap;line-height:1.65;color:#393052;background:#fcfaff;border:1px solid #e7e0f5;border-radius:10px;padding:16px;font-size:14px}\n.admin-create-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:16px}
+.admin-create-form{display:grid;gap:11px;padding:18px;border:1px solid #e7e0f5;border-radius:12px;background:#fcfaff}
+.admin-create-form h3{margin:0;color:#514274;font:700 16px Manrope}
+.admin-create-form label{display:grid;gap:6px;color:#756d8d;font-size:12px}
+.admin-create-form input,.admin-create-form select{width:100%;padding:11px;border:1px solid #ded6ef;border-radius:8px;background:#fff;color:#393052;font:inherit}
+.admin-create-form button{justify-self:start}
+@media(max-width:700px){.admin-create-grid{grid-template-columns:1fr}}
+</style>
+
+</head>
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span><i class="fa-solid fa-phone"></i> +91 98765 43210</span>
+      <span><i class="fa-solid fa-envelope"></i> info@lillian.edu.in</span>
+      <span class="top-note">Admissions open for 2026–27</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#home" aria-label="Lillian home">
+        <span class="brand-mark"><i class="fa-solid fa-building-columns"></i></span>
+        <span><strong>LILLIAN</strong><small>INSTITUTE OF TECHNOLOGY</small></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
+      <nav id="mainNav">
+        <a class="active" href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#courses">Courses</a>
+        <a href="#departments">Departments</a>
+        <a href="#faculty">Faculty &amp; Staff</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-login" href="#portals">Login <i class="fa-solid fa-arrow-right"></i></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-shade"></div>
+      <div class="quote-marquee" aria-label="Inspirational education quotes">
+        <div class="quote-stage">
+          <span>“Education is the passport to the future.”</span>
+          <span>“Great things begin with curiosity.”</span>
+          <span>“Learn boldly. Lead confidently.”</span>
+          <span>“Knowledge grows when ideas are shared.”</span>
+          <span>“Your future starts with what you learn today.”</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="ai-insight-banner" aria-label="Lillian Smart Insights academic analytics">
+      <div class="ai-insight-icon"><i class="fa-solid fa-chart-line"></i></div>
+      <div class="ai-insight-title"><h2>Lillian Smart Insights</h2><p>Academic Analytics &amp;<br>Performance Insights</p></div>
+      <div class="ai-insight-details"><p>Get smart insights on attendance, marks, performance trends and academic progress.</p><div class="ai-insight-tags"><span>Attendance Trends</span><span>Marks Analysis</span><span>Performance</span><span>Academic Summary</span></div></div>
+      <button class="ai-insight-open" type="button" data-open="litInsightPanel">Explore Insights <i class="fa-solid fa-arrow-right"></i></button>
+    </section>
+
+<section class="announcement-ticker" aria-label="Campus announcements">
+      <div class="announcement-label"><i class="fa-solid fa-bullhorn"></i> CAMPUS UPDATES</div>
+      <div class="announcement-window"><div class="announcement-track">
+        <span>Admissions are open for BE, ME, MCA and MBA programmes</span><b>✦</b>
+        <span>Explore our CSE, Civil, Mechanical, EC and EEE departments</span><b>✦</b>
+        <span>Students: Check your portal for attendance and academic updates</span><b>✦</b>
+        <span>Parents: View your child’s academic progress through the Parent Portal</span><b>✦</b>
+        <span>Admissions are open for BE, ME, MCA and MBA programmes</span><b>✦</b>
+      </div></div>
+    </section>
+
+    <section class="section about-section" id="about">
+      <div class="container about-grid">
+        <div class="about-image">
+          <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1100&q=85" alt="Modern university campus building">
+          <div class="image-caption"><i class="fa-solid fa-award"></i><span><b>Building brighter futures</b><small>Through knowledge and opportunity</small></span></div>
+        </div>
+        <div class="about-copy">
+          <div class="section-tag">ABOUT LILLIAN</div>
+          <h2>A campus that inspires<br><em>great possibilities.</em></h2>
+          <p class="muted">Lillian Institute of Technology is a sample institution created to demonstrate a modern, student-focused college website. Our vision is to make learning practical, collaborative and future-ready.</p>
+          <div class="about-points">
+            <div><i class="fa-solid fa-circle-check"></i><span><b>Industry-focused learning</b><small>Practical skills for a changing world</small></span></div>
+            <div><i class="fa-solid fa-circle-check"></i><span><b>Supportive faculty</b><small>Guidance at every step of your journey</small></span></div>
+          </div>
+          <a class="text-link" href="#contact">Know more about us <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section programs-section" id="courses">
+      <div class="container">
+        <div class="section-heading">
+          <div><div class="section-tag">ACADEMIC PROGRAMMES</div><h2>Our <em>courses.</em></h2></div>
+          <p class="muted">Choose from undergraduate, postgraduate engineering and management programmes.</p>
+        </div>
+        <div class="program-grid">
+          <article class="program-card featured"><span class="program-icon"><i class="fa-solid fa-graduation-cap"></i></span><small>UNDERGRADUATE · 4 YEARS</small><h3>BE – Engineering</h3><p>Computer Science & Engineering (CSE), Civil, Mechanical, Electronics & Communication (EC), and Electrical & Electronics (EEE).</p></article>
+          <article class="program-card"><span class="program-icon"><i class="fa-solid fa-microchip"></i></span><small>POSTGRADUATE · 2 YEARS</small><h3>ME – Engineering</h3><p>Computer Science & Engineering (CSE), Civil, Mechanical, Electronics & Communication (EC), and Electrical & Electronics (EEE).</p></article>
+          <article class="program-card"><span class="program-icon"><i class="fa-solid fa-laptop-code"></i></span><small>POSTGRADUATE · 2 YEARS</small><h3>MCA</h3><p>Master of Computer Applications.</p></article>
+          <article class="program-card"><span class="program-icon"><i class="fa-solid fa-briefcase"></i></span><small>POSTGRADUATE · 2 YEARS</small><h3>MBA</h3><p>Master of Business Administration.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section departments-section" id="departments">
+      <div class="container">
+        <div class="section-heading"><div><div class="section-tag">ACADEMIC EXCELLENCE</div><h2>Our <em>departments.</em></h2></div><p class="muted">Seven departments supporting our BE, ME, MCA and MBA programmes.</p></div>
+        <div class="department-grid">
+          <article class="department-card"><div class="department-content"><span>01 / ENGINEERING</span><h3>Computer Science &amp; Engineering (CSE)</h3><p>Computing, software development, databases and intelligent applications.</p></div></article>
+          <article class="department-card"><div class="department-content"><span>02 / ENGINEERING</span><h3>Civil Engineering</h3><p>Structural design, construction, surveying and infrastructure.</p></div></article>
+          <article class="department-card"><div class="department-content"><span>03 / ENGINEERING</span><h3>Mechanical Engineering</h3><p>Design, manufacturing, thermal and mechanical systems.</p></div></article>
+          <article class="department-card"><div class="department-content"><span>04 / ENGINEERING</span><h3>Electronics &amp; Communication (EC)</h3><p>Electronic circuits, communication and embedded systems.</p></div></article>
+          <article class="department-card"><div class="department-content"><span>05 / ENGINEERING</span><h3>Electrical &amp; Electronics (EEE)</h3><p>Electrical machines, power systems and control engineering.</p></div></article>
+          <article class="department-card"><div class="department-content"><span>06 / POSTGRADUATE</span><h3>Master of Computer Applications (MCA)</h3><p>Advanced computing, application development and IT systems.</p></div></article>
+          <article class="department-card"><div class="department-content"><span>07 / POSTGRADUATE</span><h3>Master of Business Administration (MBA)</h3><p>Management, finance, marketing and business analytics.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faculty-section" id="faculty">
+      <div class="container">
+        <div class="section-heading">
+          <div><h2>Faculty &amp; <em>staff.</em></h2></div>
+        </div>
+        <div class="faculty-directory">
+          <div class="faculty-department-list">
+            <div class="faculty-department-group">
+              <h3 class="faculty-department-title">Computer Science &amp; Engineering (CSE)</h3>
+              <ul>
+                <li>Dr. Meena Raj — HOD</li>
+                <li>Prof. Ananya Krishnan — Professor</li>
+                <li>Mr. Arjun Prakash — Assistant Professor</li>
+              </ul>
+            </div>
+            <div class="faculty-department-group">
+              <h3 class="faculty-department-title">Civil Engineering</h3>
+              <ul>
+                <li>Dr. Lakshmi Narayanan — HOD</li>
+                <li>Prof. Gokul Raj — Professor</li>
+                <li>Ms. Aishwarya R — Assistant Professor</li>
+              </ul>
+            </div>
+            <div class="faculty-department-group">
+              <h3 class="faculty-department-title">Mechanical Engineering</h3>
+              <ul>
+                <li>Dr. Suresh Balaji — HOD</li>
+                <li>Prof. Karthik M — Professor</li>
+                <li>Ms. Janani Devi — Assistant Professor</li>
+              </ul>
+            </div>
+            <div class="faculty-department-group">
+              <h3 class="faculty-department-title">Electronics &amp; Communication (EC)</h3>
+              <ul>
+                <li>Prof. Priya Nair — HOD</li>
+                <li>Dr. Sanjay Mohan — Professor</li>
+                <li>Ms. Keerthana S — Assistant Professor</li>
+              </ul>
+            </div>
+            <div class="faculty-department-group">
+              <h3 class="faculty-department-title">Electrical &amp; Electronics (EEE)</h3>
+              <ul>
+                <li>Prof. Divya Menon — HOD</li>
+                <li>Dr. Aravind Sekar — Professor</li>
+                <li>Mr. Sriram V — Assistant Professor</li>
+              </ul>
+            </div>
+            <div class="faculty-department-group">
+              <h3 class="faculty-department-title">MCA</h3>
+              <ul>
+                <li>Dr. Revathi S — HOD</li>
+                <li>Prof. Bala Murugan — Professor</li>
+                <li>Ms. Swetha Raj — Assistant Professor</li>
+              </ul>
+            </div>
+            <div class="faculty-department-group">
+              <h3 class="faculty-department-title">MBA</h3>
+              <ul>
+                <li>Dr. Radhika Menon — HOD</li>
+                <li>Prof. Prakash Anand — Professor</li>
+                <li>Ms. Farzana Ali — Assistant Professor</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="portal-section" id="portals">
+      <div class="container portal-inner">
+        <div><div class="section-tag light-tag">YOUR DIGITAL CAMPUS</div><h2>Everything you need,<br><em>in one place.</em></h2><p>Choose your portal to access your college services securely.</p></div>
+        <div class="portal-cards">
+          <a class="portal-card" href="login.html?role=student"><span><i class="fa-solid fa-user-graduate"></i></span><b>Student Portal</b><small>Attendance, results & timetable</small><i class="fa-solid fa-arrow-up-right-from-square portal-arrow"></i></a>
+          <a class="portal-card" href="login.html?role=employee"><span><i class="fa-solid fa-chalkboard-user"></i></span><b>Employee Portal</b><small>Classes, attendance & records</small><i class="fa-solid fa-arrow-up-right-from-square portal-arrow"></i></a>
+          <a class="portal-card" href="login.html?role=admin"><span><i class="fa-solid fa-user-shield"></i></span><b>Admin Portal</b><small>Smart Insights on all records</small><i class="fa-solid fa-arrow-up-right-from-square portal-arrow"></i></a>
+          <a class="portal-card" href="login.html?role=parent"><span><i class="fa-solid fa-people-roof"></i></span><b>Parent Portal</b><small>Progress, fees & announcements</small><i class="fa-solid fa-arrow-up-right-from-square portal-arrow"></i></a>
+        </div>
+      </div>
+    </section>
+<section id="litAdminDashboard" aria-label="Administrator dashboard">
+ <div class="admin-wrap">
+  <div class="admin-heading">
+   <div><div class="admin-label">LILLIAN DIGITAL CAMPUS · ADMINISTRATION</div><h1>Admin Dashboard</h1><p>Manage and review private college records securely.</p></div>
+   <button class="admin-tab" type="button" id="adminRefresh"><i class="fa-solid fa-rotate"></i> Refresh</button>
+  </div>
+  <div class="admin-summary" id="adminSummary">
+   <div><small>Student records</small><b id="adminStudentCount">—</b></div>
+   <div><small>Employee records</small><b id="adminEmployeeCount">—</b></div>
+   <div><small>Student attendance rows</small><b id="adminStudentAttendanceCount">—</b></div>
+   <div><small>Fee records</small><b id="adminFeeCount">—</b></div>
+  </div>
+  <section class="admin-panel admin-insights-panel" aria-label="Lillian Smart Insights">
+   <h2><i class="fa-solid fa-wand-magic-sparkles"></i> Lillian Smart Insights</h2>
+   <p class="admin-insights-help">Search across student, employee, attendance, marks and fee records. Matching records will stay visible here while you work in the dashboard.</p>
+   <div class="admin-tools">
+    <input id="adminInsightQuery" type="search" placeholder="Ask anything: who is the Mechanical HOD? list CSE students, attendance below 75%, pending fees...">
+    <button class="primary" id="adminInsightSearch" type="button"><i class="fa-solid fa-magnifying-glass"></i> Ask Insights</button>
+   </div>
+   <p class="admin-status" id="adminInsightStatus" role="status">Enter a name, department, register number or keyword to search all admin records.</p>
+   <div id="adminInsightResults" class="admin-table-wrap"><div class="admin-empty">Search results will appear here.</div></div>
+  </section>
+  <div class="admin-add-actions">
+   <button class="primary" type="button" id="showStudentFormBtn"><i class="fa-solid fa-user-plus"></i> Add Student</button>
+   <button class="primary" type="button" id="showEmployeeFormBtn"><i class="fa-solid fa-user-plus"></i> Add Employee</button>
+  </div>
+  <section class="admin-panel" id="adminCreatePanel" hidden>
+   <div id="studentFormWrap" hidden>
+    <h2><i class="fa-solid fa-user-plus"></i> Add New Student</h2>
+    <form id="adminStudentForm" class="admin-create-form">
+     <label>Student Name<input name="name" required></label>
+     <label>Register Number<input name="student_id" required></label>
+     <label>Email<input name="email" type="email" required></label>
+     <label>Course / Department<input name="department" required placeholder="e.g. CSE"></label>
+     <label>Year<select name="year" required><option value="">Select year</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label>
+     <button class="primary" type="submit">Save Student</button><p class="admin-status" id="studentCreateStatus" role="status"></p>
+    </form>
+   </div>
+   <div id="employeeFormWrap" hidden>
+    <h2><i class="fa-solid fa-user-plus"></i> Add New Employee</h2>
+    <form id="adminEmployeeForm" class="admin-create-form">
+     <label>Employee Name<input name="name" required></label>
+     <label>Email<input name="email" type="email" required></label>
+     <label>Designation<input name="designation" required placeholder="e.g. Assistant Professor"></label>
+     <label>Department<input name="department" required placeholder="e.g. Mechanical"></label>
+     <button class="primary" type="submit">Save Employee</button><p class="admin-status" id="employeeCreateStatus" role="status"></p>
+    </form>
+   </div>
+  </section>
+  </section>
+ </div>
+</section>
+
+  </main>
+
+  <footer id="contact">
+    <div class="container footer-grid">
+      <div><a class="brand footer-brand" href="#home"><span class="brand-mark"><i class="fa-solid fa-building-columns"></i></span><span><strong>LILLIAN</strong><small>INSTITUTE OF TECHNOLOGY</small></span></a><p class="footer-tagline">Empowering Minds. Inspiring Innovation. Building Futures.</p><p class="footer-subline">Excellence in Education • Technology for Tomorrow</p></div>
+      <div><h4>Quick Links</h4><a href="#about">About us</a><a href="#courses">Courses</a><a href="#departments">Departments</a><a href="#faculty">Faculty &amp; Staff</a></div>
+      <div><h4>Contact</h4><span>Chennai, Tamil Nadu, India</span><span>+91 98765 43210</span><span>info@lillian.edu.in</span></div>
+    </div>
+    <div class="container copyright">© 2026 Lillian Institute of Technology. Learn • Innovate • Lead.</div>
+  </footer>
+  <script>
+    // Staff directory data is intentionally not exposed on the public homepage.
+  </script>
+
+  <script src="script.js"></script>
+<!-- Lillian AI Insight + Chatbot -->
+<style>
+.lit-ai-dock{position:fixed;right:22px;bottom:20px;z-index:10000;display:flex;gap:9px;flex-direction:column;align-items:flex-end;font-family:Arial,sans-serif}
+.lit-ai-launch{border:1px solid #ded2f5;border-radius:26px;padding:12px 17px;background:#fff;color:#65469a;font-weight:700;box-shadow:0 5px 22px #6d529a2b;cursor:pointer}
+.lit-ai-launch.primary{background:#7655ad;color:#fff;border-color:#7655ad}
+body:not(.is-admin) .ai-insight-banner, body:not(.is-admin) #litInsightPanel{display:none!important} /* Smart Insights is admin-only */
+.admin-logout{position:fixed;left:18px;bottom:18px;z-index:9999;border:1px solid #ded2f5;border-radius:26px;padding:10px 16px;background:#fff;color:#65469a;font-weight:700;cursor:pointer;box-shadow:0 5px 22px #6d529a2b}
+.lit-ai-panel{display:none;flex-direction:column;width:min(390px,calc(100vw - 28px));height:min(540px,78vh);max-height:78vh;box-sizing:border-box;background:#fff;color:#332747;border:1px solid #e4daf5;border-radius:18px;box-shadow:0 12px 42px #44305d35;overflow:hidden;margin-bottom:4px}
+.lit-ai-panel[style*="display: block"]{display:flex!important}.lit-ai-panel[style*="display: flex"]{display:flex!important}
+.lit-ai-head{flex:0 0 auto;background:#eee7fb;color:#65469a;padding:14px;display:flex;align-items:center;justify-content:space-between;font-weight:700}
+.lit-ai-head small{display:block;font-weight:400;color:#796b8e;margin-top:3px}.lit-ai-head button{border:0;background:transparent;color:#65469a;font-size:22px;cursor:pointer}
+.lit-ai-log{flex:1 1 auto;min-height:0;height:auto;overflow-y:auto;overscroll-behavior:contain;padding:12px;background:#fcfaff}.lit-ai-msg{padding:10px 12px;border-radius:13px;margin:8px 0;max-width:90%;white-space:pre-wrap;line-height:1.45;font-size:14px}.lit-ai-bot{background:#fff;border:1px solid #e8e0f2}.lit-ai-user{background:#eee7fb;margin-left:auto}
+.lit-ai-form{display:flex;flex:0 0 auto;gap:7px;padding:12px;border-top:1px solid #eee7f5;background:#fff;min-height:62px;box-sizing:border-box}.lit-ai-form input{display:block;min-width:0;flex:1;padding:12px;border:1px solid #ded3ef;border-radius:10px;outline-color:#a88bd2}.lit-ai-form button{border:0;border-radius:10px;background:#7655ad;color:#fff;padding:0 14px;cursor:pointer}
+@media(max-width:480px){.lit-ai-dock{right:12px;bottom:12px}.lit-ai-panel{width:calc(100vw - 24px);height:68vh;max-height:68vh}.lit-ai-form{padding:10px}.lit-ai-form input{font-size:16px}}
+
+  .admin-insight-answer p{margin:8px 0 14px;line-height:1.6}
+  .insight-answer-table-wrap{width:100%;overflow-x:auto;margin:12px 0 18px}
+  .insight-answer-table{width:100%;border-collapse:collapse;font-size:13px;background:#fff}
+  .insight-answer-table th,.insight-answer-table td{padding:10px 12px;border:1px solid #e7e0f5;text-align:left;white-space:normal}
+  .insight-answer-table th{background:#eee9fb;color:#514477;font-weight:700}
+  .insight-answer-table tbody tr:nth-child(even){background:#faf9ff}
+  .insight-answer-list{padding-left:22px;line-height:1.7}
+</style>
+<div class="lit-ai-dock" aria-label="AI tools">
+ <section class="lit-ai-panel" id="litInsightPanel"><div class="lit-ai-head"><span>✦ Lillian Smart Insights<small>Academic insights & performance analysis</small></span><button type="button" data-close="litInsightPanel">×</button></div><div class="lit-ai-log" id="litInsightLog"><div class="lit-ai-msg lit-ai-bot">Welcome! Ask for insights about your attendance, marks, academic progress or campus records.</div></div><form class="lit-ai-form" data-mode="insight"><input aria-label="Ask Lillian Smart Insights" placeholder="Ask for an academic insight..." required><button>Send</button></form></section>
+ <section class="lit-ai-panel" id="litChatPanel"><div class="lit-ai-head"><span>◉ Lillian Chatbot<small>Campus help & conversational support</small></span><button type="button" data-close="litChatPanel">×</button></div><div class="lit-ai-log" id="litChatLog"><div class="lit-ai-msg lit-ai-bot">Hello! Ask me about courses, departments, fees or college information.</div></div><form class="lit-ai-form" data-mode="chat"><input aria-label="Chat with Lillian" placeholder="Type your message..." required><button>Send</button></form></section>
+ <button class="lit-ai-launch primary" type="button" data-open="litChatPanel">▣ Chatbot</button>
+</div>
+<script>
+(()=>{document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.lit-ai-panel').forEach(p=>p.style.display='none');const p=document.getElementById(b.dataset.open);if(p)p.style.display='block';}));document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{const p=document.getElementById(b.dataset.close);if(p)p.style.display='none';}));
+function add(log,text,who){const d=document.createElement('div');d.className='lit-ai-msg '+(who==='user'?'lit-ai-user':'lit-ai-bot');d.textContent=text;log.appendChild(d);log.scrollTop=log.scrollHeight;return d;}
+document.querySelectorAll('.lit-ai-form').forEach(form=>form.addEventListener('submit',async e=>{e.preventDefault();const input=form.querySelector('input'),q=input.value.trim();if(!q)return;input.value='';const insight=form.dataset.mode==='insight';const log=document.getElementById(insight?'litInsightLog':'litChatLog');add(log,q,'user');const pending=add(log,insight?'Analysing your academic information...':'Thinking...','bot');try{const prompt=insight?'Give a concise, evidence-based academic insight for this request. Use the authenticated user records when relevant. User question: '+q:q;const r=await fetch('/api/chat-agent',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:prompt,mode:insight?'insight':'chat'})});const data=await r.json();pending.textContent=data.reply||(r.ok?'No response received.':'Please sign in to use personal AI features.');}catch(err){pending.textContent='Unable to connect. Please check that the college server is running.';}}));})();
+// Smart Insights is visible to the signed-in administrator only.
+fetch('/api/session-role', {credentials: 'same-origin'}).then(r => r.json()).then(d => {
+  if (d.role !== 'admin') return;
+  document.body.classList.add('is-admin');
+  const out = document.createElement('button');
+  out.className = 'admin-logout'; out.type = 'button'; out.textContent = 'Admin · Logout';
+  out.onclick = async () => { await fetch('/api/logout', {method: 'POST', credentials: 'same-origin'}); location.href = '/'; };
+  document.body.appendChild(out);
+
+  const dataKeys = {students_list:'students', employees_list:'employees', student_attendance:'student_attendance', student_fees:'student_fees'};
+  const safe = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function renderInsightAnswer(value) {
+    const lines = String(value ?? '').replace(/\r/g, '').split('\n');
+    const out = [];
+    let tableRows = [];
+    let listItems = [];
+    const inline = text => safe(text)
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>');
+    const flushList = () => {
+      if (listItems.length) {
+        out.push('<ul class="insight-answer-list">' + listItems.map(x => '<li>' + inline(x) + '</li>').join('') + '</ul>');
+        listItems = [];
+      }
+    };
+    const flushTable = () => {
+      if (!tableRows.length) return;
+      const rows = tableRows.filter(row => !row.every(cell => /^:?-{3,}:?$/.test(cell.trim())));
+      if (rows.length) {
+        const head = rows[0];
+        const body = rows.slice(1);
+        out.push('<div class="insight-answer-table-wrap"><table class="insight-answer-table"><thead><tr>' +
+          head.map(cell => '<th>' + inline(cell) + '</th>').join('') +
+          '</tr></thead><tbody>' +
+          body.map(row => '<tr>' + head.map((_, i) => '<td>' + inline(row[i] || '') + '</td>').join('') + '</tr>').join('') +
+          '</tbody></table></div>');
+      }
+      tableRows = [];
+    };
+    for (const raw of lines) {
+      const line = raw.trim();
+      if (line.includes('|') && line.split('|').length >= 3) {
+        flushList();
+        const cells = line.replace(/^\|/, '').replace(/\|$/, '').split('|').map(x => x.trim());
+        tableRows.push(cells);
+        continue;
+      }
+      flushTable();
+      if (/^[-*]\s+/.test(line)) {
+        listItems.push(line.replace(/^[-*]\s+/, ''));
+      } else {
+        flushList();
+        if (line) out.push('<p>' + inline(line) + '</p>');
+      }
+    }
+    flushTable();
+    flushList();
+    return out.join('');
+  }
+  async function loadSummary() {
+    const topics=['students_list','employees_list','student_attendance','student_fees'];
+    const ids=['adminStudentCount','adminEmployeeCount','adminStudentAttendanceCount','adminFeeCount'];
+    await Promise.all(topics.map(async (topic,i)=>{
+      try {
+        const r=await fetch('/api/admin-data?topic='+encodeURIComponent(topic),{credentials:'same-origin'});
+        const d=await r.json();
+        if(!r.ok || d.status!=='success') throw Error();
+        document.getElementById(ids[i]).textContent=(d[dataKeys[topic]]||[]).length;
+      } catch(e) { document.getElementById(ids[i]).textContent='—'; }
+    }));
+  }
+  const insightButton = document.getElementById('adminInsightSearch');
+  const insightInput = document.getElementById('adminInsightQuery');
+  const insightStatus = document.getElementById('adminInsightStatus');
+  const insightResults = document.getElementById('adminInsightResults');
+  async function searchAllAdminRecords() {
+    const question = (insightInput.value || '').trim();
+    if (!question) {
+      insightStatus.textContent = 'Please type a question about students, employees, attendance, marks, fees or departments.';
+      insightResults.innerHTML = '<div class="admin-empty">Ask a question in natural language.</div>';
+      return;
+    }
+    insightButton.disabled = true;
+    insightButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Thinking...';
+    insightStatus.textContent = 'Checking the database and preparing an answer...';
+    insightResults.innerHTML = '<div class="admin-empty">Analysing your question...</div>';
+    try {
+      const response = await fetch('/api/admin-insights', {
+        method:'POST', credentials:'same-origin',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({message:question})
+      });
+      const data = await response.json();
+      if (!response.ok || data.status !== 'success') throw new Error(data.reply || data.message || 'Could not answer this question.');
+      insightStatus.textContent = 'Answer based on the private college database.';
+      insightResults.innerHTML = '<div class="admin-insight-answer">'+renderInsightAnswer(data.reply || 'No answer returned.')+'</div>';
+    } catch(err) {
+      insightStatus.textContent = err.message || 'Could not process your question.';
+      insightResults.innerHTML = '<div class="admin-empty">'+safe(insightStatus.textContent)+'</div>';
+    } finally {
+      insightButton.disabled = false;
+      insightButton.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Ask Insights';
+    }
+  }
+  insightButton.addEventListener('click', searchAllAdminRecords);
+  insightInput.addEventListener('keydown', e => { if (e.key === 'Enter') searchAllAdminRecords(); });
+
+  loadSummary();
+
+  const createPanel = document.getElementById('adminCreatePanel');
+  const studentWrap = document.getElementById('studentFormWrap');
+  const employeeWrap = document.getElementById('employeeFormWrap');
+  document.getElementById('showStudentFormBtn').addEventListener('click', () => {
+    createPanel.hidden = false; studentWrap.hidden = false; employeeWrap.hidden = true;
+    createPanel.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  document.getElementById('showEmployeeFormBtn').addEventListener('click', () => {
+    createPanel.hidden = false; studentWrap.hidden = true; employeeWrap.hidden = false;
+    createPanel.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  async function submitAdminCreate(form, type, statusId) {
+    const statusEl = document.getElementById(statusId);
+    const payload = Object.fromEntries(new FormData(form).entries());
+    payload.type = type;
+    statusEl.textContent = 'Saving...';
+    try {
+      const r = await fetch('/api/admin-create', {method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      const d = await r.json();
+      if (!r.ok || d.status !== 'success') throw new Error(d.message || 'Could not save record.');
+      statusEl.textContent = d.message;
+      form.reset();
+      await loadSummary();
+    } catch(err) {
+      statusEl.textContent = err.message;
+    }
+  }
+  document.getElementById('adminStudentForm').addEventListener('submit', e => {
+    e.preventDefault(); submitAdminCreate(e.currentTarget, 'student', 'studentCreateStatus');
+  });
+  document.getElementById('adminEmployeeForm').addEventListener('submit', e => {
+    e.preventDefault(); submitAdminCreate(e.currentTarget, 'employee', 'employeeCreateStatus');
+  });
+  // Smart Insights is embedded permanently in the Admin Dashboard; do not open a floating popup.
+}).catch(() => {});
+</script>
+</body>
+</html>
